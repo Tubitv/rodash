@@ -1,0 +1,58 @@
+# Required manifest values
+title=My Video Application
+major_version=1
+minor_version=2
+build_version=150
+mm_icon_focus_hd=pkg:/images/mm_icon_focus_hd.png
+splash_screen_fhd=pkg:/images/splash_screen_fhd.png
+
+# Splash Screen Attributes
+splash_color=#121212
+splash_min_time=1500
+splash_screen_hd=pkg:/images/splash_screen_hd.png
+splash_screen_sd=pkg:/images/splash_screen_sd.png
+
+# Graphics Scaling
+ui_resolutions=sd,hd,fhd
+uri_resolution_autosub=$$RES$$,SD,HD,FHD
+
+# Launch requirements
+requires_audiometadata=1
+requires_gaming_remote=1
+requires_mkv=1
+network_not_required=1
+bs_libs_required=roku_ads_lib
+usb_media_handler=1
+
+# DRM Attributes
+requires_aaxs_drm=0
+requires_aaxs_version=1.0
+requires_verimatrix_drm=1
+requires_verimatrix_version=1.0
+
+# Special-Purpose Attributes
+hidden=1
+playonly_aware=1
+rsg_version=1.0
+automatic_audio_guide_disabled=1
+bs_prof_enabled=true
+bs_prof_sample_ratio=1.0
+
+# Screensaver Attributes
+screensaver_title=My cool screensaver
+screensaver_private=1
+
+# Legacy
+subtitle=providing the latest in cool videos
+mm_icon_side_hd=pkg:/images/mm_icon_side_hd.png
+mm_icon_side_sd=pkg:/images/mm_icon_side_sd.png
+mm_icon_focus_fhd=pkg:/images/mm_icon_focus_fhd.png
+mm_icon_focus_sd=pkg:/images/mm_icon_focus_sd.png
+requires_bluetooth=1
+
+# torture cases
+empty_value=
+empty_equal
+
+  # Comment not left-aligned
+  attribute_not_left_aligned
