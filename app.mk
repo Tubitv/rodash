@@ -46,9 +46,6 @@ NATIVEDEVREL  = $(DISTREL)/rootfs/Linux86_dev.OBJ/root/nvram/incoming
 NATIVEDEVPKG  = $(NATIVEDEVREL)/dev.zip
 NATIVETICKLER = $(DISTREL)/application/Linux86_dev.OBJ/root/bin/plethora  tickle-plugin-installer
 
-DEVICECONFIG = ../device.conf
-include ${DEVICECONFIG}
-
 APPGENKEY = ./GENKEY
 APPDEVID = $(shell grep DevID $(APPGENKEY) | sed "s/DevID: //")
 GITCOMMIT = $(shell git rev-parse --short HEAD)

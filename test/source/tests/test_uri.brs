@@ -36,8 +36,6 @@ Function testCase_Uri_encodeParams_array()
 End Function
 
 Function testCase_Uri_parse()
-  ' Test cases grabbed from https://raw.githubusercontent.com/cweb/url-testing/master/urls.json
-  'testUrls = ParseJson(ReadAsciiFile("pkg:/source/tests/urls.json"))
 
   testUrls = [
   {
