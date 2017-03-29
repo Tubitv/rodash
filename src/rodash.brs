@@ -15,6 +15,10 @@
 
 Function rodash()
   return {
+    ' array.brs
+    intersection: arrayModule_intersection_
+    equal: arrayModule_equal_
+
     ' assocarray.brs
     pathAsArray_: assocArrayModule_pathAsArray_
     get: assocArrayModule_get_
