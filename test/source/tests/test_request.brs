@@ -1,8 +1,7 @@
 Function testSuite_Request()
   this = BaseTestSuite()
-
   this.Name = "RequestModuleTestSuite"
-
+  this.SetUp = requestTestSuite_setUp
   this.addTest("createRequest", testCase_Request_createRequest)
   this.addTest("createRequest_withMethod", testCase_Request_createRequest_withMethod)
   this.addTest("createRequest_withHeaders", testCase_Request_createRequest_withHeaders)
@@ -17,22 +16,24 @@ Function testSuite_Request()
   return this
 End Function
 
+Function requestTestSuite_setUp()
+  m._ = rodash()
+End Function
+
 
 ''''''''''''''
 ' createRequest()
 ''''''''''''''
 Function testCase_Request_createRequest()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")  
+  r = m._.createRequest("http://www.google.com")  
   return m.AssertNotInvalid(r)
 End Function
 
 Function testCase_Request_createRequest_withMethod()
-  request = RequestModule()
   result = ""
   validMethods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
   for each method in validMethods
-    r = request.createRequest("http://www.google.com", { method: method })
+    r = m._.createRequest("http://www.google.com", { method: method })
     result = result + m.AssertNotInvalid(r)
     result = result + m.AssertEqual(r.method, method)
   end for
@@ -40,11 +41,10 @@ Function testCase_Request_createRequest_withMethod()
 End Function
 
 Function testCase_Request_createRequest_withHeaders()
-  request = RequestModule()
   headers = {
     "Content-type": "application/json"  
   }
-  r = request.createRequest("http://www.google.com", { headers: headers })
+  r = m._.createRequest("http://www.google.com", { headers: headers })
   result = ""
   result = result + m.AssertNotInvalid(r)
   result = result + m.AssertAAHasKey(r.headers, "Content-type")
@@ -52,9 +52,8 @@ Function testCase_Request_createRequest_withHeaders()
 End Function
 
 Function testCase_Request_createRequest_withBody()
-  request = RequestModule()
   body = "value=true"
-  r = request.createRequest("http://www.google.com", { body: body })
+  r = m._.createRequest("http://www.google.com", { body: body })
   result = ""
   result = result + m.AssertNotInvalid(r)
   result = result + m.AssertEqual(r.body, "value=true")
@@ -62,8 +61,7 @@ Function testCase_Request_createRequest_withBody()
 End Function
 
 Function testCase_Request_createRequest_https()
-  request = RequestModule()
-  r = request.createRequest("https://www.google.com")
+  r = m._.createRequest("https://www.google.com")
   result = ""
   result = result + m.AssertNotInvalid(r)
   result = result + m.AssertTrue(r.https)
@@ -75,8 +73,7 @@ End Function
 ' start()
 ''''''''''''''
 Function testCase_Request_start_asynchronousWithPort()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")
+  r = m._.createRequest("http://www.google.com")
   port = CreateObject("roMessagePort")
   r.start(false, port)
   message = wait(3000, port)
@@ -87,8 +84,7 @@ Function testCase_Request_start_asynchronousWithPort()
 End Function
 
 Function testCase_Request_start_asynchronousWithoutPort()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")
+  r = m._.createRequest("http://www.google.com")
   port = r.start()
   message = wait(3000, port)
   result = ""
@@ -98,8 +94,7 @@ Function testCase_Request_start_asynchronousWithoutPort()
 End Function
 
 Function testCase_Request_start_synchronous()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")
+  r = m._.createRequest("http://www.google.com")
   response = r.start(true)
   return m.AssertNotEmpty(response)
 End Function
@@ -109,8 +104,7 @@ End Function
 ' cancel()
 ''''''''''''''
 Function testCase_Request_cancel()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")
+  r = m._.createRequest("http://www.google.com")
   r.start()
   r.cancel()
   return m.AssertInvalid(r.urlTransfer)
@@ -121,8 +115,7 @@ End Function
 ' handleEvent()
 ''''''''''''''
 Function testCase_Request_handleEvent()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com")
+  r = m._.createRequest("http://www.google.com")
   port = r.start()
   message = wait(3000, port)
   result = r.handleEvent(message)
@@ -130,8 +123,7 @@ Function testCase_Request_handleEvent()
 End Function
 
 Function testCase_Request_handleEvent_withError()
-  request = RequestModule()
-  r = request.createRequest("http://www.google.com", { method: "POST" })
+  r = m._.createRequest("http://www.google.com", { method: "POST" })
   port = r.start()
   message = wait(3000, port)
   resultBody = r.handleEvent(message)

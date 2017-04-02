@@ -1,13 +1,4 @@
-Function AssocArrayModule()
-  return {
-    pathAsArray_: assocArrayModule_pathAsArray_
-    get: assocArrayModule_get_
-    set: assocArrayModule_set_
-  }
-End Function
-
-
-Function assocArrayModule_pathAsArray_(path)
+Function rodash_pathAsArray_(path)
   segments = []
   if type(path) = "String" or type(path) = "roString"
     segments = Box(path).tokenize(".")
@@ -28,7 +19,7 @@ End Function
 '
 ' Resolve a nested 'dot' notation path safely.  This is primarily allow things like
 ' "myValue = a.b.c.d.e.f" to run without crashing the VM when an intermediate value is invalid.
-Function assocArrayModule_get_(aa, path, default=invalid)
+Function rodash_get_(aa, path, default=invalid)
 
   if aa = invalid or type(aa) <> "roAssociativeArray" then return default
 
@@ -60,7 +51,7 @@ End Function
 
 ''''''''
 ' set
-Function assocArrayModule_set_(aa, path, value)
+Function rodash_set_(aa, path, value)
 
   if aa = invalid or type(aa) <> "roAssociativeArray" then return aa
 

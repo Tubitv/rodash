@@ -17,23 +17,12 @@
 '
 ' NOTE! That registry entries are case-sensitive.  We force lowercase for all section and key names to avoid problems.
 '
-Function RegistryModule()
-  return {
-    ' public methods
-    read: registryModule_read_
-    write: registryModule_write_
-
-    readAll: registryModule_readAll_
-    writeAll: registryModule_writeAll_
-  }
-End Function
-
 
 '''''''''''
 ' read()
 '
 ' Read and deserialize to a native type
-Function registryModule_read_(sectionName As String, key As String) As Dynamic
+Function rodash_regRead_(sectionName As String, key As String) As Dynamic
   sectionName = LCase(sectionName)
   key = LCase(key)
   registry = CreateObject("roRegistry")  
@@ -48,7 +37,7 @@ End Function
 
 '''''''''''
 ' write()
-Function registryModule_write_(sectionName As String, key As String, value As Dynamic) As Void
+Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
   sectionName = LCase(sectionName)
   key = LCase(key)
   registry = CreateObject("roRegistry")  
@@ -61,7 +50,7 @@ End Function
 
 '''''''''
 ' readAll()
-Function registryModule_readAll_() As Object
+Function rodash_regReadAll_() As Object
   registry = CreateObject("roRegistry")
   sections = registry.GetSectionList()
   data = {}
@@ -81,7 +70,7 @@ End Function
 ' writeAll()
 '
 ' By default this overwrites any existing data, but will not remove any sections or keys
-Function registryModule_writeAll_(data As Object) As Void
+Function rodash_regWriteAll_(data As Object) As Void
   registry = CreateObject("roRegistry")
   if data <> invalid and type(data) = "roAssociativeArray" then
     for each sectionName in data
@@ -100,5 +89,3 @@ Function registryModule_writeAll_(data As Object) As Void
   end if
   registry.Flush()
 End Function
-
-

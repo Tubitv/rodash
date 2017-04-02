@@ -1,5 +1,20 @@
 ' rodash - useful utilities for brightscript language
 '
+'  Goals:
+'    - reduce Lines of Code, and thus complexity, in brightscript applications
+'    - facilitate better separation of business logic and data management
+'    - provide solutions to common runtime errors (type mismatches, unexpected invalid objects)
+'    - improve interfaces to standard Brightscript components
+'    - be agnostic of SceneGraph vs. SDK1 applications
+'    - have no other dependencies than the standard Brightscript components
+'
+'  Areas:
+'    - Objects
+'    - Requests
+'    - Uri
+'    - Registry
+'    - Manifest
+'
 ' Example usage:
 '   
 '  _ = rodash()
@@ -15,32 +30,24 @@
 
 Function rodash()
   return {
-    ' array.brs
-    intersection: arrayModule_intersection_
-    equal: arrayModule_equal_
-
-    ' assocarray.brs
-    pathAsArray_: assocArrayModule_pathAsArray_
-    get: assocArrayModule_get_
-    set: assocArrayModule_set_
-
-    ' manifest.brs
-    getManifest: manifestModule_getManifest_
-
-    ' registry.brs
-    regRead: registryModule_read_
-    regWrite: registryModule_write_
-    regReadAll: registryModule_readAll_
-    regWriteAll: registryModule_writeAll_
-
-    ' request.brs
-    createRequest: request_createRequest_
-    start_: request_start_
-    cancel_: request_cancel_
-    handleEvent_: request_handleEvent_
-
-    ' uri.brs
-    encodeParams: uri_encodeParams_
-    parse: uri_simpleParse_
+    intersection: rodash_intersection_
+    equal: rodash_equal_
+    get: rodash_get_
+    set: rodash_set_
+    getManifest: rodash_getManifest_
+    regRead: rodash_regRead_
+    regWrite: rodash_regWrite_
+    regReadAll: rodash_regReadAll_
+    regWriteAll: rodash_regWriteAll_
+    createRequest: rodash_createRequest_
+    uriEncodeParams: rodash_uri_encodeParams_
+    uriParse: rodash_uri_simpleParse_
+    empty: rodash_empty_
+    clone: rodash_clone_
+    
+    ' private
+    pathAsArray_: rodash_pathAsArray_
+    cloneNode_: rodash_cloneNode_
+    cloneAssocArray_: rodash_cloneAssocArray_
   }
 End Function

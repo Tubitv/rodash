@@ -1,13 +1,7 @@
-Function ManifestModule()
-  return {
-    get: manifestModule_getManifest_
-  }
-End Function
-
 ' Read and parse the manifest file manually in order to
 ' retrieve all key/value pairs.
 ' Manifest is always at pkg:/manifest, but can be overridden for testing
-Function manifestModule_getManifest(path="pkg:/manifest" As String)
+Function rodash_getManifest_(path="pkg:/manifest" As String)
   file = ReadAsciiFile(path)
   lines = file.split(Chr(10))
   manifest = {}

@@ -1,12 +1,11 @@
-Function testSuite_Array()
+Function testSuite_intersection()
   this = BaseTestSuite()
-
-  this.Name = "ArrayTestSuite"
-  this.addTest("intersection", testCase_Array_intersection)
+  this.Name = "IntersectionTestSuite"
+  this.addTest("intersection", testCase_intersection)
   return this
 End Function
 
-Function testCase_Array_intersection() As String
+Function testCase_intersection() As String
   testCases = [
   ' [ <a>,  <b>,  <result>]
     [[1,2], [1,2], [1,2]]        ' a & b
@@ -17,10 +16,10 @@ Function testCase_Array_intersection() As String
 
   ' deep types
   ]
-  array = ArrayModule()
+  _ = rodash()
   result = ""
   for each t in testCases
-    result = result + m.AssertEqual(array.intersection(t[0], t[1]), t[2])
+    result = result + m.AssertEqual(_.intersection(t[0], t[1]), t[2])
   end for
   return result
 End Function

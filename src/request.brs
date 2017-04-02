@@ -1,17 +1,3 @@
-Function RequestModule()
-  return {
-    ' public methods
-    createRequest: request_createRequest_
-    
-    ' private methods
-    start_: request_start_
-    cancel_: request_cancel_
-    handleEvent_: request_handleEvent_
-  }
-End Function
-
-
-
 '***************************
 '* Module functions
 '***************************
@@ -24,7 +10,7 @@ End Function
 '                 headers: {}    - request header. format {a:'1'}
 '                 body:          - request body as string
 
-Function request_createRequest_(url As String, options={} As Object) As Object
+Function rodash_createRequest_(url As String, options={} As Object) As Object
 
   ' Check if HTTPS, when we'll have to set certs for the request object
   if Left(LCase(url), 5) = "https" then
@@ -66,9 +52,9 @@ Function request_createRequest_(url As String, options={} As Object) As Object
     urlEvent: invalid      ' response roUrlEvent
     
     ' public methods
-    start: m.start_
-    cancel: m.cancel_
-    handleEvent: m.handleEvent_
+    start: rodash_request_start_
+    cancel: rodash_request_cancel_
+    handleEvent: rodash_request_handleEvent_
   }
 End Function
 
@@ -91,7 +77,7 @@ End Function
 '
 '
 'TODO: Test that roURLTransfer can do keep-alives across allocations or if we need to reuse roURLTransfer objects
-Function request_start_(synchronous=false As Boolean, messagePort=invalid As Object) As Object
+Function rodash_request_start_(synchronous=false As Boolean, messagePort=invalid As Object) As Object
 
   urlTransfer = CreateObject("roUrlTransfer")
   urlTransfer.SetUrl(m.url)
@@ -130,7 +116,7 @@ End Function
 
 
 ' Cancel a running asynchronous request
-Function request_cancel_()
+Function rodash_request_cancel_()
   if m.urlTransfer <> invalid and type(m.urlTransfer) = "roUrlTransfer" then
     m.urlTransfer.AsyncCancel()
     m.urlTransfer = invalid
@@ -141,7 +127,7 @@ End Function
 ' Handle events here, but only treat network failures as Request errors
 ' Returns invalid if either the message doesn't match this request or
 ' there was a network error.  HTTP errors are treated as success here.
-Function request_handleEvent_(message As Object) As Object
+Function rodash_request_handleEvent_(message As Object) As Object
   ' Make sure the event matches the request
   if type(message) = "roUrlEvent" and m.urlTransfer.GetIdentity() = message.GetSourceIdentity() then
     m.urlEvent = message

@@ -4,20 +4,11 @@
 ' Primarily for providing wrangling of URI and query-/post-params
 ''''''''''''''''
 
-Function UriModule()
-  return {
-    'public methods
-    encodeParams: uri_encodeParams_
-    parse: uri_simpleParse_
-  }
-End Function
-
-
 ''''''''''''''''''
 ' encodeParams()
 '
 ' encode an associative array to a urlencoded query string or post body
-Function uri_encodeParams_(params As Object) As String
+Function rodash_uri_encodeParams_(params As Object) As String
   encoded = ""
   if params <> invalid and type(params) = "roAssociativeArray" then
     ' keys come out in lexigraphical order
@@ -51,7 +42,7 @@ End Function
 '
 ' Since in all likelihood we're only dealing with http:// or https://, we can
 ' do some very simple parsing
-Function uri_simpleParse_(input As String)
+Function rodash_uri_simpleParse_(input As String)
   result = {
     scheme: ""
     port: ""
