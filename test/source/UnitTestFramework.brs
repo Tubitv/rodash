@@ -1411,6 +1411,7 @@ sub TestRunner__Run()
     for each testSuite in testSuitesList
         testCases = testSuite.testCases
         testCount = testCases.Count()
+
         alltestCount = alltestCount + testCount
 
         if FW_IsFunction(testSuite.SetUp)
@@ -1547,6 +1548,8 @@ function TestRunner__GetTestSuitesList() as Object
 
                     if FW_IsAssociativeArray(testSuite)
                         result.Push(testSuite)
+                    else
+                      print "WARNING: No tests found in "; functionName
                     end if
                 end if
             end for
