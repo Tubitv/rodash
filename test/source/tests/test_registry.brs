@@ -13,6 +13,8 @@ Function testSuite_Registry()
   this.addTest("readAndWrite_types_invalid", testCase_readAndWrite_types_invalid)
   this.addTest("readAndWrite_case", testCase_readAndWrite_case)
   this.addTest("readAllAndWriteAll", testCase_readAllAndWriteAll)
+
+  this.readAndWrite_types_helper = testCaseHelper_readAndWrite_types
   return this
 End Function
 
@@ -25,58 +27,58 @@ Function testCaseHelper_readAndWrite_types(section, key, value, readType) As Str
   return m.AssertEqual(type(m._.regRead(section, key)), readType)
 End Function
 
-Function testCase_Registry_readAndWrite_types_boolean() As String
-  return testCaseHelper_readAndWrite_types("test_types", "boolean", true, "roBoolean")
+Function testCase_readAndWrite_types_boolean() As String
+  return m.readAndWrite_types_helper("test_types", "boolean", true, "roBoolean")
 End Function
 
-Function testCase_Registry_readAndWrite_types_integer() As String
-  return testCaseHelper_readAndWrite_types("test_types", "integer", 42%, "roInt")
+Function testCase_readAndWrite_types_integer() As String
+  return m.readAndWrite_types_helper("test_types", "integer", 42%, "roInt")
 End Function
 
-Function testCase_Registry_readAndWrite_types_longInteger() As String
-  return testCaseHelper_readAndWrite_types("test_types", "longinteger", 2349823492&, "LongInteger")
+Function testCase_readAndWrite_types_longInteger() As String
+  return m.readAndWrite_types_helper("test_types", "longinteger", 2349823492&, "LongInteger")
 End Function
 
-Function testCase_Registry_readAndWrite_types_float() As String
-  return testCaseHelper_readAndWrite_types("test_types", "float", 243.573!, "roFloat")
+Function testCase_readAndWrite_types_float() As String
+  return m.readAndWrite_types_helper("test_types", "float", 243.573!, "roFloat")
 End Function
 
-Function testCase_Registry_readAndWrite_types_double() As String
-  return testCaseHelper_readAndWrite_types("test_types", "double", 1.23456789D-12#, "roFloat")      ' seems that roDouble can't come from JSON
+Function testCase_readAndWrite_types_double() As String
+  return m.readAndWrite_types_helper("test_types", "double", 1.23456789D-12#, "roFloat")      ' seems that roDouble can't come from JSON
 End Function
 
-Function testCase_Registry_readAndWrite_types_string() As String
-  return testCaseHelper_readAndWrite_types("test_types", "string", "hi", "roString")
+Function testCase_readAndWrite_types_string() As String
+  return m.readAndWrite_types_helper("test_types", "string", "hi", "roString")
 End Function
 
-Function testCase_Registry_readAndWrite_types_array() As String
-  return testCaseHelper_readAndWrite_types("test_types", "array", [1,2,3], "roArray")
+Function testCase_readAndWrite_types_array() As String
+  return m.readAndWrite_types_helper("test_types", "array", [1,2,3], "roArray")
 End Function
 
-Function testCase_Registry_readAndWrite_types_assocarray() As String
-  return testCaseHelper_readAndWrite_types("test_types", "assocarray", {a: 1}, "roAssociativeArray")
+Function testCase_readAndWrite_types_assocarray() As String
+  return m.readAndWrite_types_helper("test_types", "assocarray", {a: 1}, "roAssociativeArray")
 End Function
 
-Function testCase_Registry_readAndWrite_types_invalid() As String
-  return testCaseHelper_readAndWrite_types("test_types", "invalid", invalid, "roInvalid")
+Function testCase_readAndWrite_types_invalid() As String
+  return m.readAndWrite_types_helper("test_types", "invalid", invalid, "roInvalid")
 End Function
 
-Function testCase_Registry_readAndWrite_case() As String
+Function testCase_readAndWrite_case() As String
   r = ""
   ' make sure two write to two different cases result in same reads
-  m._.write("test_case", "Value", 1)
-  r = r + m.AssertEqual(registry.read("test_case", "Value"), Box(1))
-  r = r + m.AssertEqual(registry.read("test_case", "value"), Box(1))
-  r = r + m.AssertEqual(registry.read("test_case", "VALUE"), Box(1))
+  m._.regWrite("test_case", "Value", 1)
+  r = r + m.AssertEqual(m._.regRead("test_case", "Value"), Box(1))
+  r = r + m.AssertEqual(m._.regRead("test_case", "value"), Box(1))
+  r = r + m.AssertEqual(m._.regRead("test_case", "VALUE"), Box(1))
 
-  m._.write("test_case", "Value", 2)
-  r = r + m.AssertEqual(registry.read("test_case", "Value"), Box(2))
-  r = r + m.AssertEqual(registry.read("test_case", "value"), Box(2))
-  r = r + m.AssertEqual(registry.read("test_case", "VALUE"), Box(2))
+  m._.regWrite("test_case", "Value", 2)
+  r = r + m.AssertEqual(m._.regRead("test_case", "Value"), Box(2))
+  r = r + m.AssertEqual(m._.regRead("test_case", "value"), Box(2))
+  r = r + m.AssertEqual(m._.regRead("test_case", "VALUE"), Box(2))
   return r
 End Function
 
-Function testCase_Registry_readAllAndWriteAll() As String
+Function testCase_readAllAndWriteAll() As String
   data = {
     "section1": {
       "key1": 1
