@@ -1,6 +1,7 @@
 Function rodash()
   return {
     intersection: rodash_intersection_
+    difference: rodash_difference_
     equal: rodash_equal_
     get: rodash_get_
     set: rodash_set_
