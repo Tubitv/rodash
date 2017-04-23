@@ -16,6 +16,7 @@ Function rodash()
     clone: rodash_clone_
     andx: rodash_andx_
     orx: rodash_orx_
+    cond: rodash_cond_
     
     ' private
     pathAsArray_: rodash_pathAsArray_
