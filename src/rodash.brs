@@ -14,6 +14,8 @@ Function rodash()
     uriParse: rodash_uri_simpleParse_
     empty: rodash_empty_
     clone: rodash_clone_
+    andx: rodash_andx_
+    orx: rodash_orx_
     
     ' private
     pathAsArray_: rodash_pathAsArray_
