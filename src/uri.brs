@@ -4,10 +4,12 @@
 ' Primarily for providing wrangling of URI and query-/post-params
 ''''''''''''''''
 
-''''''''''''''''''
-' encodeParams()
-'
-' encode an associative array to a urlencoded query string or post body
+' /**
+'  * @member uriEncodeParams
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Encode an associative array to a urlencoded query string or post body
+'  */
 Function rodash_uri_encodeParams_(params As Object) As String
   encoded = ""
   if params <> invalid and type(params) = "roAssociativeArray" then
@@ -34,6 +36,17 @@ Function rodash_uri_encodeParams_(params As Object) As String
     end if
   end if
   return encoded
+End Function
+
+
+' /**
+'  * @member uriParse
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Encode an associative array to a urlencoded query string or post body
+'  */
+Function rodash_uri_parse_(input)
+  return m.uriSimpleParse(input)
 End Function
 
 

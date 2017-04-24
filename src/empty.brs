@@ -1,3 +1,10 @@
+' /**
+'  * @member empty
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Test for a string, array, or object to be invalid, length, or count of zero.
+'  *
+'  */
 Function rodash_empty_(value)
   if value = invalid then return true
   if GetInterface(value, "ifAssociativeArray") <> invalid

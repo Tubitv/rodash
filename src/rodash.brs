@@ -1,3 +1,6 @@
+' /**
+'  * @module rodash
+'  */
 Function rodash()
   return {
     intersection: rodash_intersection_
@@ -12,7 +15,7 @@ Function rodash()
     regWriteAll: rodash_regWriteAll_
     createRequest: rodash_createRequest_
     uriEncodeParams: rodash_uri_encodeParams_
-    uriParse: rodash_uri_simpleParse_
+    uriParse: rodash_uri_parse_
     empty: rodash_empty_
     clone: rodash_clone_
     andx: rodash_andx_
@@ -25,5 +28,6 @@ Function rodash()
     pathAsArray_: rodash_pathAsArray_
     cloneNode_: rodash_cloneNode_
     cloneAssocArray_: rodash_cloneAssocArray_
+    uriSimpleParse_: rodash_uri_simpleParse_
   }
 End Function

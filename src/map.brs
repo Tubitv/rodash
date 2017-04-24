@@ -1,3 +1,8 @@
+' /**
+'  * @member map
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_map_(object, fn)
   if type(fn) <> "Function"
     fn = Function(x): return x: End FUnction

@@ -1,3 +1,8 @@
+' /**
+'  * @member intersection
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_intersection_(first, second)
   result = []  
   for each f in first

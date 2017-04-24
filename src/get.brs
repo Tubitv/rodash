@@ -1,8 +1,11 @@
-'''''''''
-' get()
-'
-' Resolve a nested 'dot' notation path safely.  This is primarily allow things like
-' "myValue = a.b.c.d.e.f" to run without crashing the VM when an intermediate value is invalid.
+' /**
+'  * @member get
+'  * @memberof module:rodash
+'  * @instance
+'  * @description
+'  *   Resolve a nested 'dot' notation path safely.  This is primarily allow things like
+'  *   "myValue = a.b.c.d.e.f" to run without crashing the VM when an intermediate value is invalid.
+'  */
 Function rodash_get_(aa, path, default=invalid)
 
   if aa = invalid or type(aa) <> "roAssociativeArray" then return default

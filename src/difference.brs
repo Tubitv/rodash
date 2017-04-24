@@ -1,3 +1,8 @@
+' /**
+'  * @member difference
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_difference_(first, second)
   result = []  
   for each f in first

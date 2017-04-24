@@ -1,0 +1,11 @@
+{
+  "plugins": ["plugins/brightscriptCommentsOnlyJSDocPlugin", "plugins/markdown"],
+  "source": {
+    "include": [ "src" ],
+    "includePattern": ".+\\.brs?$"
+  },
+  "templates": {
+    "systemName": "rodash",
+    "search": false
+  }
+}

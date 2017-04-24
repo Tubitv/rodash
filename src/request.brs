@@ -2,13 +2,19 @@
 '* Module functions
 '***************************
 
-' Create a new request object - inspired by node-fetch
-'
-' @url       - the full url to be requested
-' @options   - request options:
-'                 method:        - 'GET', 'PUT', 'POST', 'DELETE', 'PATCH'
-'                 headers: {}    - request header. format {a:'1'}
-'                 body:          - request body as string
+' /**
+'  * @member createRequest
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Create a new request object - inspired by node-fetch
+'  * 
+'  * @param {String} url the full url to be requested
+'  * @param {AssociativeArray} options   - request options:
+'  * @param {String} options.method 'GET', 'PUT', 'POST', 'DELETE', 'PATCH'
+'  * @param {AssociativeArray} options.headers Extra request headers
+'  * @param {String} options.body request body
+'  *                
+'  */
 
 Function rodash_createRequest_(url As String, options={} As Object) As Object
 

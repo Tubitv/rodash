@@ -18,10 +18,12 @@
 ' NOTE! That registry entries are case-sensitive.  We force lowercase for all section and key names to avoid problems.
 '
 
-'''''''''''
-' read()
-'
-' Read and deserialize to a native type
+' /**
+'  * @member regRead
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Read and deserialize to a native type
+'  */
 Function rodash_regRead_(sectionName As String, key As String) As Dynamic
   sectionName = LCase(sectionName)
   key = LCase(key)
@@ -35,8 +37,11 @@ Function rodash_regRead_(sectionName As String, key As String) As Dynamic
 End Function
 
 
-'''''''''''
-' write()
+' /**
+'  * @member regWrite
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
   sectionName = LCase(sectionName)
   key = LCase(key)
@@ -48,8 +53,11 @@ Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic
 End Function
 
 
-'''''''''
-' readAll()
+' /**
+'  * @member regReadAll
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_regReadAll_() As Object
   registry = CreateObject("roRegistry")
   sections = registry.GetSectionList()
@@ -66,10 +74,12 @@ Function rodash_regReadAll_() As Object
   return data
 End Function
 
-'''''''''
-' writeAll()
-'
-' By default this overwrites any existing data, but will not remove any sections or keys
+' /**
+'  * @member regReadAll
+'  * @memberof module:rodash
+'  * @instance
+'  * @description By default this overwrites any existing data, but will not remove any sections or keys
+'  */
 Function rodash_regWriteAll_(data As Object) As Void
   registry = CreateObject("roRegistry")
   if data <> invalid and type(data) = "roAssociativeArray" then

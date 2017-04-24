@@ -1,5 +1,8 @@
-''''''''
-' set
+' /**
+'  * @member set
+'  * @memberof module:rodash
+'  * @instance
+'  */
 Function rodash_set_(aa, path, value)
 
   if aa = invalid or type(aa) <> "roAssociativeArray" then return aa
