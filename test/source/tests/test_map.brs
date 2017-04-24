@@ -28,8 +28,6 @@ End Function
 
 ' NOTE: This fails because native functions don't return a type() of "roFunction" and can't be passed as function arguments.  They are received by the function as <UNINITIALIZED>.
 Function testCase_map_array_rofunction_native()
-  print "Abs(2) = "; Abs(2)
-  print "type(Abs) = "; type(Abs)
   absolute = m._.map([-1,-2,-3], Abs)
   result = m.AssertNotInvalid(absolute)
   result = result + m.AssertEqual(type(absolute), "roArray")

@@ -29,7 +29,6 @@ Function testCase_equal()
   for i=0 to types.count()-1
     for j=0 to types.count()-1
       result = m._.equal(types[i][1], types[j][1])
-      print "_.equal("; types[i][0]; ","; types[j][0]; ") = "; result
       if i = j and types[i][0] <> "array" and types[i][0] <> "assocarray" and types[i][0] <> "node"
         r = r + m.AssertTrue(result)
       else if types[i][0] = "boolean" and (types[j][0] = "integer" or types[j][0] = "longInteger" or types[j][0] = "float")
