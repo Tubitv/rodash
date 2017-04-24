@@ -28,6 +28,8 @@ Function rodash()
     pathAsArray_: rodash_pathAsArray_
     cloneNode_: rodash_cloneNode_
     cloneAssocArray_: rodash_cloneAssocArray_
+    cloneArrayish_: rodash_cloneArrayish_
+    cloneStringish_: rodash_cloneStringish_
     uriSimpleParse_: rodash_uri_simpleParse_
   }
 End Function
