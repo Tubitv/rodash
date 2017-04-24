@@ -19,7 +19,11 @@ Function testCase_intersection() As String
   _ = rodash()
   result = ""
   for each t in testCases
-    result = result + m.AssertEqual(_.intersection(t[0], t[1]), t[2])
+    intersection = _.intersection(t[0], t[1])
+    result = result + m.AssertTrue(intersection.count() = t[2].count())
+    for i=0 to intersection.count()-1
+      result = result + m.AssertEqual(intersection[i], t[2][i])
+    end for
   end for
   return result
 End Function

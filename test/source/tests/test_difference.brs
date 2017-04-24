@@ -19,7 +19,14 @@ Function testCase_difference() As String
   _ = rodash()
   result = ""
   for each t in testCases
-    result = result + m.AssertEqual(_.difference(t[0], t[1]), t[2])
+    difference = _.difference(t[0], t[1])
+    result = result + m.AssertTrue(difference.count() = t[2].count())
+    for i=0 to difference.count()-1
+      result = result + m.AssertEqual(difference[i], t[2][i])
+    end for
   end for
+  '#####
+  if result <> "" then print result
+  '#####
   return result
 End Function
