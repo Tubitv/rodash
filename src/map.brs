@@ -1,5 +1,4 @@
 Function rodash_map_(object, fn)
-  print "type(fn) = "; type(fn)
   if type(fn) <> "Function"
     fn = Function(x): return x: End FUnction
   end if
