@@ -1,3 +1,22 @@
+' VERSION: rodash 0.1.0
+' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
+' LICENSE: a copy of this software and associated documentation files (the
+' LICENSE: "Software"), to deal in the Software without restriction, including
+' LICENSE: without limitation the rights to use, copy, modify, merge, publish,
+' LICENSE: distribute, sublicense, and/or sell copies of the Software, and to
+' LICENSE: permit persons to whom the Software is furnished to do so, subject to
+' LICENSE: the following conditions:
+' LICENSE: 
+' LICENSE: The above copyright notice and this permission notice shall be
+' LICENSE: included in all copies or substantial portions of the Software.
+' LICENSE: 
+' LICENSE: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+' LICENSE: EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+' LICENSE: MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+' LICENSE: NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+' LICENSE: LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+' LICENSE: OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+' LICENSE: WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Function rodash_andx_(args)
 for each a in args
 if not a then return false

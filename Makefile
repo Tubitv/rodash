@@ -13,7 +13,9 @@ BLANK_LINES_RE="/^[ \t]*'.*/d"
 COMMENT_LINES_RE="/^[ ]*$$/d"
 LEADING_WHITESPACE_RE="s/^[ \t]*//"
 dist:
-	cd src && ls | xargs -J % sed -E -e ${COMMENT_LINES_RE} -e ${BLANK_LINES_RE} -e ${LEADING_WHITESPACE_RE} % > ../dist/rodash.cat.brs
+	sed "s/^/' VERSION: rodash /g" ./VERSION > ./dist/rodash.cat.brs
+	sed "s/^/' LICENSE: /g" ./LICENSE >> ./dist/rodash.cat.brs
+	cd src && ls | xargs -J % sed -E -e ${COMMENT_LINES_RE} -e ${BLANK_LINES_RE} -e ${LEADING_WHITESPACE_RE} % >> ../dist/rodash.cat.brs
 
 doc:
 	cd doc && npm install
