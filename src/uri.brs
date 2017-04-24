@@ -46,7 +46,7 @@ End Function
 '  * @description Encode an associative array to a urlencoded query string or post body
 '  */
 Function rodash_uri_parse_(input)
-  return m.uriSimpleParse(input)
+  return m.uriSimpleParse_(input)
 End Function
 
 
