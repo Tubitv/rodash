@@ -1,5 +1,5 @@
 {
-  "plugins": ["plugins/brightscriptCommentsOnlyJSDocPlugin", "plugins/markdown"],
+  "plugins": ["brightscriptCommentsOnlyJSDocPlugin.js", "plugins/markdown"],
   "source": {
     "include": [ "src" ],
     "includePattern": ".+\\.brs?$"
