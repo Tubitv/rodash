@@ -18,6 +18,7 @@ Function rodash()
     andx: rodash_andx_
     orx: rodash_orx_
     cond: rodash_cond_
+    map: rodash_map_
     
     ' private
     pathAsArray_: rodash_pathAsArray_
