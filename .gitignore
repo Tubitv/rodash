@@ -1,2 +1,3 @@
 build
-dist
+dist/apps
+doc/node_modules
