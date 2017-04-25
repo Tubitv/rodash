@@ -10,6 +10,7 @@ Function testSuite_clone()
   this.addTest("clone_arrayish_roXMLList", testCase_clone_arrayish_roXMLList)
   this.addTest("clone_stringish_string", testCase_clone_stringish_string) 
   this.addTest("clone_stringish_roString", testCase_clone_stringish_roString) 
+  'TODO(Chris): Tests for cloneDeep
   return this
 End Function
 
