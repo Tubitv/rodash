@@ -22,7 +22,18 @@
 '  * @member regRead
 '  * @memberof module:rodash
 '  * @instance
-'  * @description Read and deserialize to a native type
+'  * @description Read registry at key in sectionName and deserialize from JSON string.
+'  * @example
+'  * 
+'  * _.regRead("auth", "password")
+'  * '  => "secret123abc!"
+'  *
+'  * _.regRead("user", "bookmarkIds")
+'  * '  => [1,2,3]
+'  *
+'  * _.regRead("user", "settings"0
+'  * '  => {a:1, b:2}
+'  * 
 '  */
 Function rodash_regRead_(sectionName As String, key As String) As Dynamic
   sectionName = LCase(sectionName)
@@ -36,11 +47,19 @@ Function rodash_regRead_(sectionName As String, key As String) As Dynamic
   end if
 End Function
 
-
 ' /**
 '  * @member regWrite
 '  * @memberof module:rodash
 '  * @instance
+'  * @description Serialize value to JSON string and write to the registry at key in sectionName.
+'  * @example
+'  * 
+'  * _.regWrite("auth", "password", "secret123abc!")
+'  *
+'  * _.regWrite("user", "bookmarkIds", [1,2,3])
+'  *
+'  * _.regWrite("user", "settings", {a:1, b:2})
+'  * 
 '  */
 Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
   sectionName = LCase(sectionName)
@@ -52,11 +71,17 @@ Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic
   registry.Flush()
 End Function
 
-
 ' /**
 '  * @member regReadAll
 '  * @memberof module:rodash
 '  * @instance
+'  * @description Read the entire registry for the channel.
+'  * @example
+'  *
+'  * _.regReadAll()
+'  * ' => { "section1": { "key1": "value1", "key2: "value2"}, "section2": ... }
+'  *
+'  *
 '  */
 Function rodash_regReadAll_() As Object
   registry = CreateObject("roRegistry")
@@ -75,10 +100,17 @@ Function rodash_regReadAll_() As Object
 End Function
 
 ' /**
-'  * @member regReadAll
+'  * @member regWriteAll
 '  * @memberof module:rodash
 '  * @instance
-'  * @description By default this overwrites any existing data, but will not remove any sections or keys
+'  * @description 
+'  *   Write the entire registry for the channel. By default this overwrites 
+'  *   any existing data, but will not remove any sections or keys
+'  *
+'  * @example
+'  *
+'  * _.regWriteAll({ "section1": { "key1": "value1", "key2: "value2"}, "section2": ... })
+'  *
 '  */
 Function rodash_regWriteAll_(data As Object) As Void
   registry = CreateObject("roRegistry")

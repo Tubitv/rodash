@@ -207,6 +207,10 @@ end if</pre>
 </dt>
 <dd>
     
+    <div class="description">
+        <p>Create a new object as a shallow copy of the passed in value.</p>
+    </div>
+    
 
     
 
@@ -248,6 +252,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">source = { a: 1, b: invalid, c: &quot;3&quot; }
+dest = _.clone(source)</pre>
 
 
     
@@ -263,6 +274,10 @@ end if</pre>
 </dt>
 <dd>
     
+    <div class="description">
+        <p>Create a new object as a deep copy of the passed in value.</p>
+    </div>
+    
 
     
 
@@ -304,6 +319,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">source = [{ a: 1, b: invalid, c: &quot;3&quot; }]
+dest = _.clone(source)</pre>
 
 
     
@@ -439,6 +461,22 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">&#x27; Simple request
+r = _.createRequest(&quot;http://www.google.com&quot;)
+response = r.start(true)
+
+&#x27; Complex request with options
+headers = { &quot;Content-type&quot;: &quot;application/json&quot; }
+r = _.createRequest(&quot;http://www.google.com&quot;, { method: &quot;GET&quot;, headers: headers })
+port = CreateObject(&quot;roMessagePort&quot;)
+r.start(false, port)
+message = wait(3000, port)
+result = r.handleEvent(message)</pre>
+
+
+    
 </dd>
 
         
@@ -450,6 +488,10 @@ end if</pre>
     
 </dt>
 <dd>
+    
+    <div class="description">
+        <p>Return a new array of items from the first which are not in the second.</p>
+    </div>
     
 
     
@@ -492,6 +534,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">difference = _.difference([1,2], [2])
+&#x27; =&gt; [1]</pre>
 
 
     
@@ -555,6 +604,28 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.empty(invalid))
+&#x27;  =&gt; true
+
+_.empty(&quot;&quot;))
+&#x27;  =&gt; true
+
+_.empty(&quot;abc&quot;))
+&#x27;  =&gt; false
+
+_.empty({}))
+&#x27;  =&gt; true
+
+_.empty({a:1}))
+&#x27;  =&gt; false
+
+_.empty([]))
+&#x27;  =&gt; true</pre>
+
+
+    
 </dd>
 
         
@@ -566,6 +637,10 @@ end if</pre>
     
 </dt>
 <dd>
+    
+    <div class="description">
+        <p>Enhance the native '=' operator by catching type mismatch errors.</p>
+    </div>
     
 
     
@@ -608,6 +683,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.equal(invalid, &quot;a&quot;)
+&#x27;  =&gt; false</pre>
 
 
     
@@ -669,6 +751,20 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">data = { a: 1 b: { c: 2 d: { e: 3 f: [4, 5] } } }
+value = _.get(data, [&quot;b&quot;,&quot;d&quot;,&quot;f&quot;])
+&#x27;  =&gt; [4, 5]
+
+value = _.get(data, &quot;b.d.f[0]&quot;)
+&#x27;  =&gt; 4
+
+value = _.get(data, &quot;a[0]&quot;)
+&#x27;  =&gt; invalid</pre>
 
 
     
@@ -734,6 +830,13 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.getManifest()
+&#x27;  =&gt; { &quot;title&quot;: &quot;My Channel&quot;, ... }</pre>
+
+
+    
 </dd>
 
         
@@ -745,6 +848,10 @@ end if</pre>
     
 </dt>
 <dd>
+    
+    <div class="description">
+        <p>Find the integer index of an item within an array.  Uses _.equal to test for same item.</p>
+    </div>
     
 
     
@@ -787,6 +894,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.indexOf([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], c)
+&#x27;  =&gt; 2</pre>
 
 
     
@@ -802,6 +916,10 @@ end if</pre>
 </dt>
 <dd>
     
+    <div class="description">
+        <p>Return a new array of items from the first which are also in the second.</p>
+    </div>
+    
 
     
 
@@ -843,6 +961,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">intersection = _.intersection([1,2], [2])
+&#x27; =&gt; [2]</pre>
 
 
     
@@ -858,6 +983,10 @@ end if</pre>
 </dt>
 <dd>
     
+    <div class="description">
+        <p>Execute a function over all items of an object, collecting the results into an array.</p>
+    </div>
+    
 
     
 
@@ -899,6 +1028,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.map([1,2,3], Function(x): return x*x: End Function)
+&#x27;  =&gt; [1,4,9]</pre>
 
 
     
@@ -988,7 +1124,7 @@ end if</pre>
 <dd>
     
     <div class="description">
-        <p>Read and deserialize to a native type</p>
+        <p>Read registry at key in sectionName and deserialize from JSON string.</p>
     </div>
     
 
@@ -1035,59 +1171,16 @@ end if</pre>
 
 
     
-</dd>
-
+        <h5>Example</h5>
         
-            
-<hr>
-<dt class="name" id="regReadAll">
-    <h4 id="regReadAll"><span class="type-signature"></span>regReadAll<span class="type-signature"></span></h4>
+    <pre class="sunlight-highlight-javascript">_.regRead(&quot;auth&quot;, &quot;password&quot;)
+&#x27;  =&gt; &quot;secret123abc!&quot;
 
-    
-</dt>
-<dd>
-    
+_.regRead(&quot;user&quot;, &quot;bookmarkIds&quot;)
+&#x27;  =&gt; [1,2,3]
 
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
+_.regRead(&quot;user&quot;, &quot;settings&quot;0
+&#x27;  =&gt; {a:1, b:2}</pre>
 
 
     
@@ -1104,7 +1197,7 @@ end if</pre>
 <dd>
     
     <div class="description">
-        <p>By default this overwrites any existing data, but will not remove any sections or keys</p>
+        <p>Read the entire registry for the channel.</p>
     </div>
     
 
@@ -1151,6 +1244,13 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.regReadAll()
+&#x27; =&gt; { &quot;section1&quot;: { &quot;key1&quot;: &quot;value1&quot;, &quot;key2: &quot;value2&quot;}, &quot;section2&quot;: ... }</pre>
+
+
+    
 </dd>
 
         
@@ -1162,6 +1262,10 @@ end if</pre>
     
 </dt>
 <dd>
+    
+    <div class="description">
+        <p>Serialize value to JSON string and write to the registry at key in sectionName.</p>
+    </div>
     
 
     
@@ -1204,6 +1308,83 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.regWrite(&quot;auth&quot;, &quot;password&quot;, &quot;secret123abc!&quot;)
+
+_.regWrite(&quot;user&quot;, &quot;bookmarkIds&quot;, [1,2,3])
+
+_.regWrite(&quot;user&quot;, &quot;settings&quot;, {a:1, b:2})</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="regWriteAll">
+    <h4 id="regWriteAll"><span class="type-signature"></span>regWriteAll<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Write the entire registry for the channel. By default this overwrites 
+  any existing data, but will not remove any sections or keys</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.regWriteAll({ &quot;section1&quot;: { &quot;key1&quot;: &quot;value1&quot;, &quot;key2: &quot;value2&quot;}, &quot;section2&quot;: ... })</pre>
 
 
     
@@ -1219,6 +1400,11 @@ end if</pre>
 </dt>
 <dd>
     
+    <div class="description">
+        <p>Use nested 'dot' notation path to set a value within an object. This 
+  function will create intermediate objects as necessary.</p>
+    </div>
+    
 
     
 
@@ -1260,6 +1446,13 @@ end if</pre>
 
 	
 </dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">data = _.set({}, [&quot;b&quot;,&quot;d&quot;,&quot;f&quot;], 3)
+&#x27;  =&gt; {b: { d: { f: 3}}}</pre>
 
 
     
@@ -1323,6 +1516,13 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.uriEncodeParams({ a: 1, b: 2, c: &quot;three&quot;, d: &quot;four with spaces&quot;})
+&#x27;  =&gt; &quot;a=1&amp;b=2&amp;c=three&amp;d=four%20with%20spaces&quot;</pre>
+
+
+    
 </dd>
 
         
@@ -1336,7 +1536,7 @@ end if</pre>
 <dd>
     
     <div class="description">
-        <p>Encode an associative array to a urlencoded query string or post body</p>
+        <p>Parse a string uri into its parts.</p>
     </div>
     
 
@@ -1383,6 +1583,13 @@ end if</pre>
 
 
     
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">_.uriParse(&quot;https://www.google.com/#q=bees&quot;)
+&#x27;  =&gt; { scheme: &quot;http&quot;, host: &quot;www.google.com&quot;, hash: ... }</pre>
+
+
+    
 </dd>
 
         </dl>
@@ -1422,7 +1629,7 @@ end if</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
 	
-		on 2017-04-24T16:48:57-04:00
+		on 2017-04-24T22:39:57-04:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -9,6 +9,10 @@
 '  * @memberof module:rodash
 '  * @instance
 '  * @description Encode an associative array to a urlencoded query string or post body
+'  * @example
+'  *
+'  * _.uriEncodeParams({ a: 1, b: 2, c: "three", d: "four with spaces"})
+'  * '  => "a=1&b=2&c=three&d=four%20with%20spaces"
 '  */
 Function rodash_uri_encodeParams_(params As Object) As String
   encoded = ""
@@ -43,7 +47,12 @@ End Function
 '  * @member uriParse
 '  * @memberof module:rodash
 '  * @instance
-'  * @description Encode an associative array to a urlencoded query string or post body
+'  * @description Parse a string uri into its parts.
+'  * @example
+'  *
+'  * _.uriParse("https://www.google.com/#q=bees")
+'  * '  => { scheme: "http", host: "www.google.com", hash: ... }
+'  *
 '  */
 Function rodash_uri_parse_(input)
   return m.uriSimpleParse_(input)

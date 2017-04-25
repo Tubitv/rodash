@@ -2,6 +2,15 @@
 '  * @member set
 '  * @memberof module:rodash
 '  * @instance
+'  * @description
+'  *   Use nested 'dot' notation path to set a value within an object. This 
+'  *   function will create intermediate objects as necessary.
+'  *
+'  * @example
+'  *
+'  * data = _.set({}, ["b","d","f"], 3)
+'  * '  => {b: { d: { f: 3}}}
+'  *
 '  */
 Function rodash_set_(aa, path, value)
 

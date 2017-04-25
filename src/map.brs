@@ -2,6 +2,12 @@
 '  * @member map
 '  * @memberof module:rodash
 '  * @instance
+'  * @description Execute a function over all items of an object, collecting the results into an array.
+'  * @example
+'  *
+'  * _.map([1,2,3], Function(x): return x*x: End Function)
+'  * '  => [1,4,9]
+'  * 
 '  */
 Function rodash_map_(object, fn)
   if type(fn) <> "Function"

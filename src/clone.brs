@@ -51,6 +51,12 @@ End Function
 '  * @member clone
 '  * @memberof module:rodash
 '  * @instance
+'  * @description Create a new object as a shallow copy of the passed in value.
+'  * @example
+'  *
+'  * source = { a: 1, b: invalid, c: "3" }
+'  * dest = _.clone(source)
+'  *
 '  */
 Function rodash_clone_(source)
   if source <> invalid 
@@ -73,7 +79,13 @@ End Function
 ' /**
 '  * @member cloneDeep
 '  * @memberof module:rodash
+'  * @description Create a new object as a deep copy of the passed in value.
 '  * @instance
+'  * @example 
+'  *
+'  * source = [{ a: 1, b: invalid, c: "3" }]
+'  * dest = _.clone(source)
+'  *
 '  */
 Function rodash_cloneDeep_(source)
   newTree = m.clone(source)

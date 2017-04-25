@@ -7,6 +7,19 @@
 '  * @memberof module:rodash
 '  * @instance
 '  * @description Create a new request object - inspired by node-fetch
+'  * @example
+'  *
+'  * ' Simple request
+'  * r = _.createRequest("http://www.google.com")
+'  * response = r.start(true)
+'  *
+'  * ' Complex request with options
+'  * headers = { "Content-type": "application/json" }
+'  * r = _.createRequest("http://www.google.com", { method: "GET", headers: headers })
+'  * port = CreateObject("roMessagePort")
+'  * r.start(false, port)
+'  * message = wait(3000, port)
+'  * result = r.handleEvent(message)
 '  * 
 '  * @param {String} url the full url to be requested
 '  * @param {AssociativeArray} options   - request options:

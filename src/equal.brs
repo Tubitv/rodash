@@ -2,6 +2,12 @@
 '  * @member equal
 '  * @memberof module:rodash
 '  * @instance
+'  * @description Enhance the native '=' operator by catching type mismatch errors.
+'  * @example
+'  *
+'  * _.equal(invalid, "a")
+'  * '  => false
+'  *
 '  */
 '
 ' We don't try to compare object equivalency here, just

@@ -3,6 +3,25 @@
 '  * @memberof module:rodash
 '  * @instance
 '  * @description Test for a string, array, or object to be invalid, length, or count of zero.
+'  * @example
+'  *
+'  * _.empty(invalid))
+'  * '  => true
+'  *
+'  * _.empty(""))
+'  * '  => true
+'  *
+'  * _.empty("abc"))
+'  * '  => false
+'  *
+'  * _.empty({}))
+'  * '  => true
+'  *
+'  * _.empty({a:1}))
+'  * '  => false
+'  *
+'  * _.empty([]))
+'  * '  => true
 '  *
 '  */
 Function rodash_empty_(value)

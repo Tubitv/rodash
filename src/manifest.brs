@@ -6,6 +6,11 @@
 '  *   Read and parse the manifest file manually in order to
 '  *   retrieve all key/value pairs.
 '  *   Manifest is always at pkg:/manifest, but can be overridden for testing
+'  *
+'  * @example
+'  *
+'  * _.getManifest()
+'  * '  => { "title": "My Channel", ... }
 '  */
 Function rodash_getManifest_(path="pkg:/manifest" As String)
   file = ReadAsciiFile(path)
