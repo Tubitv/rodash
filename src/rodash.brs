@@ -18,6 +18,7 @@ Function rodash()
     uriParse: rodash_uri_parse_
     empty: rodash_empty_
     clone: rodash_clone_
+    cloneDeep: rodash_cloneDeep_
     andx: rodash_andx_
     orx: rodash_orx_
     cond: rodash_cond_

@@ -10,7 +10,8 @@ Function testSuite_clone()
   this.addTest("clone_arrayish_roXMLList", testCase_clone_arrayish_roXMLList)
   this.addTest("clone_stringish_string", testCase_clone_stringish_string) 
   this.addTest("clone_stringish_roString", testCase_clone_stringish_roString) 
-  'TODO(Chris): Tests for cloneDeep
+  this.addTest("cloneDeep_node", testCase_cloneDeep_node)
+  'this.addTest("cloneDeep_roAssociativeArray", testCase_cloneDeep_roAssociativeArray)
   return this
 End Function
 
@@ -141,5 +142,45 @@ Function testCase_clone_stringish_roString()
   print "source = "; source
   print "dest = "; dest
   result = result + m.AssertTrue(source <> dest)
+  return result
+End Function
+
+'''''''''''''''''
+' cloneDeep
+'''''''''''''''''
+
+Function testCase_cloneDeep_node()
+  ' set up
+  source = CreateObject("roSGNode", "ContentNode")
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+  child2 = source.createChild("ContentNode")
+  child2.id = "def"
+  grandchild1 = child2.createChild("ContentNode")
+  grandchild1.id = "ghi"
+
+  dest = m._.cloneDeep(source)
+
+  ' make sure clone matches source
+  result = m.AssertNotInvalid(dest)
+  skeys = source.keys()
+  dkeys = dest.keys()
+  result = result + m.AssertEqual(skeys.count(), dkeys.count())
+  for i=0 to skeys.count()-1
+    result = result + m.AssertEqual(skeys[i], dkeys[i])
+    ' metadata is a component and suffers from TYPE_MISMATCH errors if compared
+    if skeys[i] <> "metadata"
+      result = result + m.AssertEqual(source[skeys[i]], dest[dkeys[i]])
+    end if
+  end for
+
+  ' verify that new changes to the source don't affect the clone
+  child1.id = "123"
+  child2.id = "456"
+  grandchild1.id = "789"
+
+  result = result + m.AssertTrue(child1.id <> dest.getChild(0).id)
+  result = result + m.AssertTrue(child2.id <> dest.getChild(1).id)
+  result = result + m.AssertTrue(grandchild1.id <> dest.getChild(1).getchild(0).id)
   return result
 End Function
