@@ -69,8 +69,25 @@ Function rodash_clone_(source)
     else if (type(source) = "roString") or (type(source) = "String")
       return m.cloneStringish_(source)
     else
-      ' TODO: test if boxed vs. native types can be cloned
-      '       by simply returning them here
+      if type(Box(source)) <> type(source)
+        ' If type can be boxed, it's a native type we can return by value
+        return source
+      else if type(source) = "roInt"
+        return Box(source.GetInt())
+      else if type(source) = "roLongInt"
+        return Box(source.GetLongInt())
+      else if type(source) = "roFloat"
+        return Box(source.GetFloat())
+      else if type(source) = "roDouble"
+        return Box(source.GetDouble())
+      else if type(source) = "roBoolean"
+        return Box(source.GetBoolean())
+      else
+        ' source must be a non-cloneable type such as Function, Interface,
+        ' or native component
+        'TODO(Chris): is there a more appropriate return value here?
+        return invalid
+      end if
     end if
   end if
   return invalid
