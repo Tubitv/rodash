@@ -69,6 +69,21 @@ return m.cloneArrayish_(source)
 else if (type(source) = "roString") or (type(source) = "String")
 return m.cloneStringish_(source)
 else
+if type(Box(source)) <> type(source)
+return source
+else if type(source) = "roInt"
+return Box(source.GetInt())
+else if type(source) = "roLongInt"
+return Box(source.GetLongInt())
+else if type(source) = "roFloat"
+return Box(source.GetFloat())
+else if type(source) = "roDouble"
+return Box(source.GetDouble())
+else if type(source) = "roBoolean"
+return Box(source.GetBoolean())
+else
+return invalid
+end if
 end if
 end if
 return invalid
@@ -85,6 +100,92 @@ if expression
 return t
 else
 return f
+end if
+End Function
+Function rodash_createRequest_(url As String, options={} As Object) As Object
+if Left(LCase(url), 5) = "https" then
+https = true
+else
+https = false
+end if
+validMethods = {"GET":true, "PUT":true, "POST":true, "DELETE":true, "PATCH":true}
+if options <> invalid and options.method <> invalid and validMethods.DoesExist(UCase(options.method)) then
+method = UCase(options.method)
+else
+method = "GET"
+end if
+if options <> invalid and options.headers <> invalid and type(options.headers) = "roAssociativeArray" then
+headers = options.headers
+else
+headers = {}
+end if
+if options <> invalid and options.body <> invalid and (type(options.body) = "String" or type(options.body) = "roString") then
+body = options.body
+else
+body = ""
+end if
+return {
+url: url
+https: https
+headers: headers
+body: body
+method: method
+id: CreateObject("roDeviceInfo").GetRandomUUID()
+urlTransfer: invalid
+urlEvent: invalid      ' response roUrlEvent
+start: rodash_request_start_
+cancel: rodash_request_cancel_
+handleEvent: rodash_request_handleEvent_
+}
+End Function
+Function rodash_request_start_(synchronous=false As Boolean, messagePort=invalid As Object) As Object
+urlTransfer = CreateObject("roUrlTransfer")
+urlTransfer.SetUrl(m.url)
+if m.https then
+urlTransfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
+end if
+urlTransfer.SetRequest(m.method)
+urlTransfer.EnableEncodings(true)
+urlTransfer.RetainBodyOnError(true)
+if messagePort = invalid then
+messagePort = CreateObject("roMessagePort")
+end if
+urlTransfer.SetMessagePort(messagePort)
+urlTransfer.SetHeaders(m.headers)
+postMethods = {"PUT":true,"POST":true,"PATCH":true}
+if postMethods.DoesExist(m.method) then
+urlTransfer.AsyncPostFromString(m.body)
+else
+urlTransfer.AsyncGetToString()
+end if
+m.urlTransfer = urlTransfer
+if synchronous then
+result = invalid
+while m.urlEvent = invalid
+message = wait(0, messagePort)
+result = m.handleEvent(message)
+end while
+return result
+else
+return m.urlTransfer.GetMessagePort()
+end if
+End Function
+Function rodash_request_cancel_()
+if m.urlTransfer <> invalid and type(m.urlTransfer) = "roUrlTransfer" then
+m.urlTransfer.AsyncCancel()
+m.urlTransfer = invalid
+end if
+End Function
+Function rodash_request_handleEvent_(message As Object) As Object
+if type(message) = "roUrlEvent" and m.urlTransfer.GetIdentity() = message.GetSourceIdentity() then
+m.urlEvent = message
+if message.GetResponseCode() > 0 then
+return message.GetString()
+else
+return invalid
+end if
+else
+return invalid
 end if
 End Function
 Function rodash_difference_(first, second)
@@ -273,92 +374,6 @@ end for
 end if
 registry.Flush()
 End Function
-Function rodash_createRequest_(url As String, options={} As Object) As Object
-if Left(LCase(url), 5) = "https" then
-https = true
-else
-https = false
-end if
-validMethods = {"GET":true, "PUT":true, "POST":true, "DELETE":true, "PATCH":true}
-if options <> invalid and options.method <> invalid and validMethods.DoesExist(UCase(options.method)) then
-method = UCase(options.method)
-else
-method = "GET"
-end if
-if options <> invalid and options.headers <> invalid and type(options.headers) = "roAssociativeArray" then
-headers = options.headers
-else
-headers = {}
-end if
-if options <> invalid and options.body <> invalid and (type(options.body) = "String" or type(options.body) = "roString") then
-body = options.body
-else
-body = ""
-end if
-return {
-url: url
-https: https
-headers: headers
-body: body
-method: method
-id: CreateObject("roDeviceInfo").GetRandomUUID()
-urlTransfer: invalid
-urlEvent: invalid      ' response roUrlEvent
-start: rodash_request_start_
-cancel: rodash_request_cancel_
-handleEvent: rodash_request_handleEvent_
-}
-End Function
-Function rodash_request_start_(synchronous=false As Boolean, messagePort=invalid As Object) As Object
-urlTransfer = CreateObject("roUrlTransfer")
-urlTransfer.SetUrl(m.url)
-if m.https then
-urlTransfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
-end if
-urlTransfer.SetRequest(m.method)
-urlTransfer.EnableEncodings(true)
-urlTransfer.RetainBodyOnError(true)
-if messagePort = invalid then
-messagePort = CreateObject("roMessagePort")
-end if
-urlTransfer.SetMessagePort(messagePort)
-urlTransfer.SetHeaders(m.headers)
-postMethods = {"PUT":true,"POST":true,"PATCH":true}
-if postMethods.DoesExist(m.method) then
-urlTransfer.AsyncPostFromString(m.body)
-else
-urlTransfer.AsyncGetToString()
-end if
-m.urlTransfer = urlTransfer
-if synchronous then
-result = invalid
-while m.urlEvent = invalid
-message = wait(0, messagePort)
-result = m.handleEvent(message)
-end while
-return result
-else
-return m.urlTransfer.GetMessagePort()
-end if
-End Function
-Function rodash_request_cancel_()
-if m.urlTransfer <> invalid and type(m.urlTransfer) = "roUrlTransfer" then
-m.urlTransfer.AsyncCancel()
-m.urlTransfer = invalid
-end if
-End Function
-Function rodash_request_handleEvent_(message As Object) As Object
-if type(message) = "roUrlEvent" and m.urlTransfer.GetIdentity() = message.GetSourceIdentity() then
-m.urlEvent = message
-if message.GetResponseCode() > 0 then
-return message.GetString()
-else
-return invalid
-end if
-else
-return invalid
-end if
-End Function
 Function rodash()
 return {
 intersection: rodash_intersection_
@@ -376,6 +391,7 @@ uriEncodeParams: rodash_uri_encodeParams_
 uriParse: rodash_uri_parse_
 empty: rodash_empty_
 clone: rodash_clone_
+cloneDeep: rodash_cloneDeep_
 andx: rodash_andx_
 orx: rodash_orx_
 cond: rodash_cond_
