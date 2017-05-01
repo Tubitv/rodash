@@ -4,11 +4,11 @@
 
 ##  Goals:
 
-- reduce Lines of Code, and thus complexity, in brightscript applications
+- reduce total lines of code, and thus complexity, in brightscript applications
 - facilitate better separation of business logic and data management
-- provide solutions to common runtime errors (type mismatches, unexpected invalid objects)
-- improve interfaces to standard Brightscript components
-- be agnostic of SceneGraph vs. SDK1 applications
+- provide safety for common runtime errors (type mismatches, unexpected invalid objects)
+- supplement standard Brightscript components interfaces
+- be SceneGaph agnostic (not a framework)
 - have no other dependencies than the standard Brightscript components
 - thoroughly tested and documented behavior
 
@@ -53,28 +53,70 @@ googleReq.start(true)
   => "<!doctype html><html..."
 ```
 
-## API
+## API Documentation
 
-#### intersection()
+[API Documentation](https://cdthompson.github.io/rodash)
 
-#### equal()
 
-#### get()
+## Building rodash.cat.brs
 
-#### set()
+This will generate a single .brs file suitable for inserting into a channel source tree.
 
-#### getManifest()
+    $ make dist
+    
+## Building API documentation
 
-#### regRead()
+Creating the documentation requires npm to be installed and available to the Makefile.
 
-#### regWrite()
+    $ make doc
+    
+## Running tests
 
-#### regReadAll()
+    $ export ROKU_DEV_TARGET=x.x.x.x
+    $ export DEV_PASSWORD=xxxx
+    $ make test
 
-#### regWriteAll()
+-----
 
-#### createRequest()
+## Roadmap
 
-#### uriEncodeParams()
+Q2Y17
 
-#### uriParse()
+- Goal: first release with critical features for use cases
+    - safety
+        - type mismatches and invalidity in equality statements
+            - `_.equal`
+        - nested ifs for deep object retrieval, e.g. `value = a.b.c.d`
+            - `_.get`
+            - `_.set`
+        - node, array, and assocarray cloning
+            - `_.clone`
+            - `_.cloneDeep`
+    - commonly created solutions
+        - reading/writing registry
+            - `_.regRead`
+            - `_.regWrite`
+            - `_.regReadAll`
+            - `_.regWriteAll`
+        - manifest reading
+            - `_.manifestRead`
+        - uri wrangling
+            - `_.uriParse`
+            - `_.uriEncodeParams`
+        - string/array emptiness checks
+            - `_.empty`
+    - code clarity
+        - multi-line conditional statements
+            - `_.andx`
+            - `_.orx`
+        - conditional assignments
+            - `_.cond`
+- Goal: build system
+    - Creation of single-file distributable
+    - Unit test framework
+    - Documentation generation
+- Goal: Documentation
+    - coding standards
+    - contribution guidelines
+    - release process
+    - usage, examples, source links, test links

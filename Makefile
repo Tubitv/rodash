@@ -18,5 +18,5 @@ dist:
 	cd src && ls | xargs -J % sed -E -e ${COMMENT_LINES_RE} -e ${BLANK_LINES_RE} -e ${LEADING_WHITESPACE_RE} % >> ../dist/rodash.cat.brs
 
 doc:
-	cd doc && npm install
-	./doc/node_modules/.bin/jsdoc -c doc/jsdoc.json -t doc/node_modules/ink-docstrap/template -d dist/doc
+	cd jsdoc && npm install
+	./jsdoc/node_modules/.bin/jsdoc -c jsdoc/jsdoc.json -t jsdoc/node_modules/ink-docstrap/template -d docs
