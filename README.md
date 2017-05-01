@@ -55,7 +55,7 @@ googleReq.start(true)
 
 ## API Documentation
 
-[API Documentation](https://cdthompson.github.io/rodash)
+[API Documentation](https://cdthompson.github.io/rodash/module-rodash.html)
 
 
 ## Building rodash.cat.brs
