@@ -2,6 +2,34 @@
 [Lodash](https://lodash.com/)-inspired utility functions for Roku Brightscript
 
 
+## API Documentation
+
+[API Documentation](https://cdthompson.github.io/rodash/module-rodash.html)
+
+
+## Example usage:
+
+```
+_ = rodash()
+_.getManifest()                                             
+  => { title: "My Roku App", ...}
+  
+_.get({ a: { b: 2}}, "b")                                   
+  => 2
+  
+_.regWrite("auth", "oauth", { id: 1234, token: 5678 })      
+  => n/a
+  
+_.regRead("auth", "oauth")                                  
+  => { id: 1234, token: 5678 })
+
+googleReq = _.createRequest("http://www.google.com")        
+  => { <request object> }
+  
+googleReq.start(true)                                       
+  => "<!doctype html><html..."
+```
+
 ##  Goals:
 
 - reduce total lines of code, and thus complexity, in brightscript applications
@@ -29,34 +57,6 @@
   - Registry
   - Manifest
   - Display
-
-## Example usage:
-
-```
-_ = rodash()
-_.getManifest()                                             
-  => { title: "My Roku App", ...}
-  
-_.get({ a: { b: 2}}, "b")                                   
-  => 2
-  
-_.regWrite("auth", "oauth", { id: 1234, token: 5678 })      
-  => n/a
-  
-_.regRead("auth", "oauth")                                  
-  => { id: 1234, token: 5678 })
-
-googleReq = _.createRequest("http://www.google.com")        
-  => { <request object> }
-  
-googleReq.start(true)                                       
-  => "<!doctype html><html..."
-```
-
-## API Documentation
-
-[API Documentation](https://cdthompson.github.io/rodash/module-rodash.html)
-
 
 ## Building rodash.cat.brs
 
