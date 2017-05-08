@@ -25,6 +25,7 @@ Function rodash()
     map: rodash_map_
     indexOf: rodash_indexOf_
     min: rodash_min_
+    max: rodash_max_
     
     ' private
     pathAsArray_: rodash_pathAsArray_

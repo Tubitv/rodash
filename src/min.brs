@@ -6,7 +6,7 @@
 '  * @example
 '  *
 '  * _.min(2,1)
-'  * '  => 2
+'  * '  => 1
 '  *
 '  */
 Function rodash_min_(a,b)
