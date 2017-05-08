@@ -290,6 +290,11 @@ else
 return []
 end if
 End Function
+Function rodash_min_(a,b)
+min = invalid
+result = eval("if a <= b then: min = a: else: min = b: end if")
+return min
+End Function
 Function rodash_orx_(args)
 for each a in args
 if a then return true
@@ -397,6 +402,7 @@ orx: rodash_orx_
 cond: rodash_cond_
 map: rodash_map_
 indexOf: rodash_indexOf_
+min: rodash_min_
 pathAsArray_: rodash_pathAsArray_
 cloneNode_: rodash_cloneNode_
 cloneAssocArray_: rodash_cloneAssocArray_
