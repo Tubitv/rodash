@@ -4,7 +4,7 @@
 # Run the tests
 test: dist
 	@rm -rf build/*
-	mkdir build
+	mkdir -p build
 	cp -r test/* build
 	cp dist/rodash.cat.brs build/source
 	cd build; ${MAKE} install
