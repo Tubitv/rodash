@@ -10,8 +10,8 @@
 '  *
 '  */
 Function rodash_max_(a,b)
-  min = invalid
+  max = invalid
   ' wrap compares in eval in case arguments are invalid or non-numeric
-  result = eval("if a >= b then: min = a: else: min = b: end if")
-  return min
+  result = eval("if a >= b then: max = a: else: max = b: end if")
+  return max
 End Function

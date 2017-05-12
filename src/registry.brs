@@ -31,7 +31,7 @@
 '  * _.regRead("user", "bookmarkIds")
 '  * '  => [1,2,3]
 '  *
-'  * _.regRead("user", "settings"0
+'  * _.regRead("user", "settings")
 '  * '  => {a:1, b:2}
 '  * 
 '  */
