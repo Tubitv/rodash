@@ -291,9 +291,9 @@ return []
 end if
 End Function
 Function rodash_max_(a,b)
-min = invalid
-result = eval("if a >= b then: min = a: else: min = b: end if")
-return min
+max = invalid
+result = eval("if a >= b then: max = a: else: max = b: end if")
+return max
 End Function
 Function rodash_min_(a,b)
 min = invalid
