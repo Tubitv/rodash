@@ -51,7 +51,7 @@ End Function
 '  * @example
 '  *
 '  * _.uriParse("https://www.google.com/#q=bees")
-'  * '  => { scheme: "http", host: "www.google.com", hash: ... }
+'  * '  => { scheme: "https", host: "www.google.com", hash: ... }
 '  *
 '  */
 Function rodash_uri_parse_(input)
