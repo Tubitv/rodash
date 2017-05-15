@@ -188,6 +188,65 @@ else
 return invalid
 end if
 End Function
+Function rodash_getDeviceProfile_() As Object
+ai = CreateObject("roAppInfo")
+di = CreateObject("roDeviceInfo")
+profile =  {
+appInfo: {
+id: ai.GetID()
+version: ai.GetVersion()
+itle: ai.GetTitle()
+subtitle: ai.GetSubtitle()
+devid: ai.GetDevID()
+isDev: ai.IsDev()
+}
+deviceInfo: {
+model: di.GetModel()
+modelDetails: di.GetModelDetails()
+modelDisplayName: di.GetModelDisplayName()
+friendlyName: di.GetFriendlyName()
+version: di.GetVersion()
+uniqueId: di.GetDeviceUniqueId()
+advertisingId: di.GetAdvertisingId()
+adTrackingDisabled: di.IsAdIdTrackingDisabled()
+rackingId: di.GetClientTrackingId()
+imeZone: di.GetTimeZone()
+features: {
+"5.1_surround_sound": di.HasFeature("5.1_surround_sound")
+"can_output_5.1_surround_sound": di.HasFeature("can_output_5.1_surround_sound")
+"sd_only_hardware": di.HasFeature("sd_only_hardware")
+"usb_hardware": di.HasFeature("usb_hardware")
+"1080p_hardware": di.HasFeature("1080p_hardware")
+"sdcard_hardware": di.HasFeature("sdcard_hardware")
+"ethernet_hardware": di.HasFeature("ethernet_hardware")
+"gaming_hardware": di.HasFeature("gaming_hardware")
+"bluetooth_hardware": di.HasFeature("bluetooth_hardware")
+}
+locale: di.GetCurrentLocale()
+country: di.GetCountryCode()
+drm: di.GetDrmInfo()
+displayType: di.GetDisplayType()
+displayMode: di.GetDisplayMode()
+displayAspectRatio: di.GetDisplayAspectRatio()
+displaySize: di.GetDisplaySize()
+videoMode: di.GetVideoMode()
+displayProperties: di.GetDisplayProperties()
+supportedGraphicsResolutions: di.GetSupportedGraphicsResolutions()
+uiResolution: di.GetUIResolution()
+graphicsPlatform: di.GetGraphicsPlatform()
+videoDecodeInfo: di.GetVideoDecodeInfo()
+audioOutputChannel: di.GetAudioOutputChannel()
+audioDecodeInfo: di.GetAudioDecodeInfo()
+}
+}
+ic = CreateObject("roImageCanvas")
+if ic <> invalid
+profile.imageCanvas = {
+canvasRect: ic.GetCanvasRect()
+}
+end if
+return profile
+End Function
 Function rodash_difference_(first, second)
 result = []  
 for each f in first
@@ -409,6 +468,7 @@ map: rodash_map_
 indexOf: rodash_indexOf_
 min: rodash_min_
 max: rodash_max_
+getDeviceProfile: rodash_getDeviceProfile_
 pathAsArray_: rodash_pathAsArray_
 cloneNode_: rodash_cloneNode_
 cloneAssocArray_: rodash_cloneAssocArray_

@@ -26,6 +26,7 @@ Function rodash()
     indexOf: rodash_indexOf_
     min: rodash_min_
     max: rodash_max_
+    getDeviceProfile: rodash_getDeviceProfile_
     
     ' private
     pathAsArray_: rodash_pathAsArray_
