@@ -11,8 +11,10 @@ Function rodash()
     getManifest: rodash_getManifest_
     regRead: rodash_regRead_
     regWrite: rodash_regWrite_
+    regDelete: rodash_regDelete_
     regReadAll: rodash_regReadAll_
     regWriteAll: rodash_regWriteAll_
+    regDeleteAll: rodash_regDeleteAll_
     createRequest: rodash_createRequest_
     uriEncodeParams: rodash_uri_encodeParams_
     uriParse: rodash_uri_parse_

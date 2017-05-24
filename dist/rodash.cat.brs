@@ -409,6 +409,15 @@ section.Write(key, FormatJson(value))
 section.Flush()
 registry.Flush()
 End Function
+Function rodash_regDelete_(sectionName As String, key As String) As Void
+sectionName = LCase(sectionName)
+key = LCase(key)
+registry = CreateObject("roRegistry")
+section = CreateObject("roRegistrySection", sectionName)
+if section.Exists(key) then section.Delete(key)
+section.Flush()
+registry.Flush()
+End Function
 Function rodash_regReadAll_() As Object
 registry = CreateObject("roRegistry")
 sections = registry.GetSectionList()
@@ -443,6 +452,14 @@ end for
 end if
 registry.Flush()
 End Function
+Function rodash_regDeleteAll_() As Void
+registry = CreateObject("roRegistry")
+sections = registry.GetSectionList()
+for each sectionName in sections
+registry.Delete(sectionName)
+end for
+registry.Flush()
+End Function
 Function rodash()
 return {
 intersection: rodash_intersection_
@@ -453,8 +470,10 @@ set: rodash_set_
 getManifest: rodash_getManifest_
 regRead: rodash_regRead_
 regWrite: rodash_regWrite_
+regDelete: rodash_regDelete_
 regReadAll: rodash_regReadAll_
 regWriteAll: rodash_regWriteAll_
+regDeleteAll: rodash_regDeleteAll_
 createRequest: rodash_createRequest_
 uriEncodeParams: rodash_uri_encodeParams_
 uriParse: rodash_uri_parse_

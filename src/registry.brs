@@ -71,6 +71,28 @@ Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic
   registry.Flush()
 End Function
 
+
+' /**
+'  * @member regDelete
+'  * @memberof module:rodash
+'  * @instance
+'  * @description Delete the registry key from sectionName
+'  * @example
+'  *
+'  * _.regDelete("session", "cookie")
+'  *
+'  */
+Function rodash_regDelete_(sectionName As String, key As String) As Void
+  sectionName = LCase(sectionName)
+  key = LCase(key)
+  registry = CreateObject("roRegistry")
+  section = CreateObject("roRegistrySection", sectionName)
+  if section.Exists(key) then section.Delete(key)
+  section.Flush()
+  registry.Flush()
+End Function
+
+
 ' /**
 '  * @member regReadAll
 '  * @memberof module:rodash
@@ -129,5 +151,26 @@ Function rodash_regWriteAll_(data As Object) As Void
       section.Flush()
     end for
   end if
+  registry.Flush()
+End Function
+
+' /**
+'  * @member deleteAll
+'  * @memberof module:rodash
+'  * @instance
+'  * @description
+'  *   Delete all registry entries for the channel
+'  *
+'  * @example
+'  *
+'  * _.regDeleteAll()
+'  *
+'  */
+Function rodash_regDeleteAll_() As Void
+  registry = CreateObject("roRegistry")
+  sections = registry.GetSectionList()
+  for each sectionName in sections
+    registry.Delete(sectionName)
+  end for
   registry.Flush()
 End Function

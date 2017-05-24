@@ -13,6 +13,8 @@ Function testSuite_Registry()
   this.addTest("readAndWrite_types_invalid", testCase_readAndWrite_types_invalid)
   this.addTest("readAndWrite_case", testCase_readAndWrite_case)
   this.addTest("readAllAndWriteAll", testCase_readAllAndWriteAll)
+  this.addTest("delete", testCase_registry_delete)
+  this.addTest("deleteAll", testCase_registry_deleteAll)
 
   this.readAndWrite_types_helper = testCaseHelper_readAndWrite_types
   return this
@@ -109,4 +111,38 @@ Function testCase_readAllAndWriteAll() As String
     end for
   end for
   return r
+End Function
+
+Function testCase_registry_delete()
+  m._.regWrite("test_case", "Value", 1)
+  value = m._.regRead("test_case", "Value")
+  result = m.AssertTrue(value = 1)
+  m._.regDelete("test_case", "Value")
+  value = m._.regRead("test_case", "Value")
+  result = result + m.AssertInvalid(value)
+  return result
+End Function
+
+Function testCase_registry_deleteAll()
+  data = {
+    section1: {
+      a: 1
+      b: 2
+      c: 3
+    }
+    section2: {
+      d: 4
+      e: 5
+      f: 6
+    }
+  }
+  m._.regWriteAll(data)
+  values = m._.regReadAll()
+  result = m.AssertTrue(values.count() >= 2)
+  result = result + m.AssertTrue(values.section1.count() >= 3)
+  result = result + m.AssertTrue(values.section2.count() >= 3)
+  m._.regDeleteAll()
+  values = m._.regReadAll()
+  result = result + m.AssertTrue(values.count() = 0)
+  return result
 End Function
