@@ -21,8 +21,6 @@ Function rodash()
     empty: rodash_empty_
     clone: rodash_clone_
     cloneDeep: rodash_cloneDeep_
-    andx: rodash_andx_
-    orx: rodash_orx_
     cond: rodash_cond_
     map: rodash_map_
     indexOf: rodash_indexOf_

@@ -120,9 +120,6 @@ Q2Y17
         - string/array emptiness checks
             - `_.empty`
     - code clarity
-        - multi-line conditional statements
-            - `_.andx`
-            - `_.orx`
         - conditional assignments
             - `_.cond`
 - Goal: build system
