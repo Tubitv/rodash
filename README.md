@@ -4,8 +4,7 @@
 
 ## API Documentation
 
-[API Documentation](https://cdthompson.github.io/rodash/module-rodash.html)
-
+[API Documentation](https://tubitv.github.io/rodash/module-rodash.html)
 
 ## Example usage:
 
