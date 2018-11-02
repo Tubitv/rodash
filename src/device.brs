@@ -63,12 +63,5 @@ Function rodash_getDeviceProfile_() As Object
       audioDecodeInfo: di.GetAudioDecodeInfo()
     }
   }
-  ' roImageCanvas is deprecated and will be removed in future firmware
-  ic = CreateObject("roImageCanvas")
-  if ic <> invalid
-    profile.imageCanvas = {
-      canvasRect: ic.GetCanvasRect()
-    }
-  end if
   return profile
 End Function
