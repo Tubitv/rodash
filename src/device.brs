@@ -15,6 +15,42 @@
 Function rodash_getDeviceProfile_() As Object
   ai = CreateObject("roAppInfo")
   di = CreateObject("roDeviceInfo")
+
+  ' Safe fallback for various unique identifiers
+  if FindMemberFunction(di, "GetChannelClientId") <> invalid
+    uniqueId = di.GetChannelClientId()
+  else if FindMemberFunction(di, "GetClientTrackingId") <> invalid
+    uniqueId = di.GetClientTrackingId()
+  else if FindMemberFunction(di, "GetPublisherId") <> invalid
+    uniqueId = di.GetPublisherId()
+  else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
+    uniqueId = di.GetPublisherId()
+  else
+    uniqueId = ""
+  end if
+
+  if FindMemberFunction(di, "GetRIDA") <> invalid
+    adId = di.GetRIDA()
+  else if FindMemberFunction(di, "GetAdvertisingId") <> invalid
+    adId = di.GetAdvertisingId()
+  else
+    adId = ""
+  end if
+
+  if FindMemberFunction(di, "IsRIDADisabled") <> invalid
+    tracking = di.IsRIDADisabled()
+  else if FindMemberFunction(di, "IsAdIdTrackingDisabled") <> invalid
+    tracking = di.IsAdIdTrackingDisabled()
+  else 
+    tracking = false
+  end if
+
+  if FindMemberFunction(di, "GetDrmInfoEx") <> invalid
+    drmInfo = di.GetDrmInfoEx()
+  else if FindMemberFunction(di, "GetDrmInfo") <> invalid
+    drmInfo = di.GetDrmInfo()
+  end if
+
   profile =  {
     appInfo: {
       id: ai.GetID()
@@ -30,10 +66,10 @@ Function rodash_getDeviceProfile_() As Object
       modelDisplayName: di.GetModelDisplayName()
       friendlyName: di.GetFriendlyName()
       version: di.GetVersion()
-      uniqueId: di.GetDeviceUniqueId()
-      advertisingId: di.GetAdvertisingId()
-      adTrackingDisabled: di.IsAdIdTrackingDisabled()
-      trackingId: di.GetClientTrackingId()
+      uniqueId: uniqueId
+      advertisingId: adId
+      adTrackingDisabled: tracking
+      trackingId: uniqueId
       timeZone: di.GetTimeZone()
       features: {
         "5.1_surround_sound": di.HasFeature("5.1_surround_sound")
