@@ -12,7 +12,7 @@ test: dist
 # Smash the library down to one file
 BLANK_LINES_RE="/^[ \t]*'.*/d"
 COMMENT_LINES_RE="/^[ ]*$$/d"
-LEADING_WHITESPACE_RE="s/^[ \t]*//"
+LEADING_WHITESPACE_RE="s/^[[:space:]]*//"
 dist:
 	sed "s/^/' VERSION: rodash /g" ./VERSION > ./dist/rodash.cat.brs
 	sed "s/^/' LICENSE: /g" ./LICENSE >> ./dist/rodash.cat.brs
