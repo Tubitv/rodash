@@ -1,4 +1,4 @@
-' VERSION: rodash 0.2.0
+' VERSION: rodash 0.3.0
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
@@ -185,11 +185,41 @@ End Function
 Function rodash_getDeviceProfile_() As Object
 ai = CreateObject("roAppInfo")
 di = CreateObject("roDeviceInfo")
+if FindMemberFunction(di, "GetChannelClientId") <> invalid
+uniqueId = di.GetChannelClientId()
+else if FindMemberFunction(di, "GetClientTrackingId") <> invalid
+uniqueId = di.GetClientTrackingId()
+else if FindMemberFunction(di, "GetPublisherId") <> invalid
+uniqueId = di.GetPublisherId()
+else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
+uniqueId = di.GetPublisherId()
+else
+uniqueId = ""
+end if
+if FindMemberFunction(di, "GetRIDA") <> invalid
+adId = di.GetRIDA()
+else if FindMemberFunction(di, "GetAdvertisingId") <> invalid
+adId = di.GetAdvertisingId()
+else
+adId = ""
+end if
+if FindMemberFunction(di, "IsRIDADisabled") <> invalid
+tracking = di.IsRIDADisabled()
+else if FindMemberFunction(di, "IsAdIdTrackingDisabled") <> invalid
+tracking = di.IsAdIdTrackingDisabled()
+else 
+tracking = false
+end if
+if FindMemberFunction(di, "GetDrmInfoEx") <> invalid
+drmInfo = di.GetDrmInfoEx()
+else if FindMemberFunction(di, "GetDrmInfo") <> invalid
+drmInfo = di.GetDrmInfo()
+end if
 profile =  {
 appInfo: {
 id: ai.GetID()
 version: ai.GetVersion()
-itle: ai.GetTitle()
+title: ai.GetTitle()
 subtitle: ai.GetSubtitle()
 devid: ai.GetDevID()
 isDev: ai.IsDev()
@@ -200,11 +230,11 @@ modelDetails: di.GetModelDetails()
 modelDisplayName: di.GetModelDisplayName()
 friendlyName: di.GetFriendlyName()
 version: di.GetVersion()
-uniqueId: di.GetDeviceUniqueId()
-advertisingId: di.GetAdvertisingId()
-adTrackingDisabled: di.IsAdIdTrackingDisabled()
-rackingId: di.GetClientTrackingId()
-imeZone: di.GetTimeZone()
+uniqueId: uniqueId
+advertisingId: adId
+adTrackingDisabled: tracking
+trackingId: uniqueId
+timeZone: di.GetTimeZone()
 features: {
 "5.1_surround_sound": di.HasFeature("5.1_surround_sound")
 "can_output_5.1_surround_sound": di.HasFeature("can_output_5.1_surround_sound")
@@ -233,12 +263,6 @@ audioOutputChannel: di.GetAudioOutputChannel()
 audioDecodeInfo: di.GetAudioDecodeInfo()
 }
 }
-ic = CreateObject("roImageCanvas")
-if ic <> invalid
-profile.imageCanvas = {
-canvasRect: ic.GetCanvasRect()
-}
-end if
 return profile
 End Function
 Function rodash_difference_(first, second)
@@ -263,16 +287,49 @@ end if
 return false
 End Function
 Function rodash_equal_(a, b)
-compare = false
-result = eval("if a = b then compare = true")
-if not compare
-if type(a) = type(b)
-if type(a) = invalid 
-compare = true
+all = {
+"rosgnode": true
+"rofunction": true
+"invalid": true
+"roarray": true
+"roassociativearray": true
+}
+incomparable = {
+"string": {
+"integer": true
+"rointeger": true
+"boolean": true
+"roboolean": true
+"roarray": true
+"roassociativearray": true
+"longinteger": true
+"rofloat": true
+}
+"rostring": {
+"integer": true
+"rointeger": true
+"boolean": true
+"roboolean": true
+"roarray": true
+"roassociativearray": true
+"longinteger": true
+"rofloat": true
+}
+}
+atype = lcase(type(a))
+btype = lcase(type(b))
+if all[atype] = invalid and all[btype] = invalid
+if incomparable[lcase(type(a))] = invalid or incomparable[lcase(type(a))][lcase(type(b))] = invalid 
+if incomparable[lcase(type(b))] = invalid or incomparable[lcase(type(b))][lcase(type(a))] = invalid
+if a = b
+return true
+else if type(a) = type(b) and type(a) = invalid 
+return true
 end if
 end if
 end if
-return compare
+end if
+return false
 End Function
 Function rodash_get_(aa, path, default=invalid)
 if aa = invalid or type(aa) <> "roAssociativeArray" then return default
@@ -344,14 +401,68 @@ return []
 end if
 End Function
 Function rodash_max_(a,b)
-max = invalid
-result = eval("if a >= b then: max = a: else: max = b: end if")
-return max
+comparable = [
+"integer"
+"rointeger"
+"roint"
+"float"
+"rofloat"
+"double"
+"rodouble"
+]
+for i=0 to comparable.count()-1
+if lcase(type(a)) = comparable[i]
+exit for
+end if
+end for
+if i = comparable.count()
+return b
+end if
+for j=0 to comparable.count()-1
+if lcase(type(b)) = comparable[j]
+exit for
+end if
+end for
+if j = comparable.count()
+return a
+end if
+if a >= b
+return a
+else
+return b
+end if
 End Function
 Function rodash_min_(a,b)
-min = invalid
-result = eval("if a <= b then: min = a: else: min = b: end if")
-return min
+comparable = [
+"integer"
+"rointeger"
+"roint"
+"float"
+"rofloat"
+"double"
+"rodouble"
+]
+for i=0 to comparable.count()-1
+if lcase(type(a)) = comparable[i]
+exit for
+end if
+end for
+if i = comparable.count()
+return b
+end if
+for j=0 to comparable.count()-1
+if lcase(type(b)) = comparable[j]
+exit for
+end if
+end for
+if j = comparable.count()
+return a
+end if
+if a <= b
+return a
+else
+return b
+end if
 End Function
 Function rodash_pathAsArray_(path)
 pathRE = CreateObject("roRegex", "\[([0-9]+)\]", "i")
@@ -513,7 +624,7 @@ value = value.toStr()  ' force to roString
 if FindMemberFunction(value, "EncodeUriComponent") <> invalid then
 value = value.EncodeUriComponent()          
 else
-ransferEncoder = CreateObject("roUrlTransfer")
+transferEncoder = CreateObject("roUrlTransfer")
 value = transferEncoder.Escape(value)
 end if
 end if
