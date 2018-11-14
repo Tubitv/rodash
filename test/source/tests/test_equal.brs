@@ -29,12 +29,17 @@ Function testCase_equal()
   for i=0 to types.count()-1
     for j=0 to types.count()-1
       result = m._.equal(types[i][1], types[j][1])
-      if i = j and types[i][0] <> "array" and types[i][0] <> "assocarray" and types[i][0] <> "node"
+      ' Set of types that are comparable will be equal when compared to themself
+      if i = j and types[i][0] <> "array" and types[i][0] <> "assocarray" and types[i][0] <> "node" and types[i][0] <> "function"
         r = r + m.AssertTrue(result)
+
+      ' Set of types that can be coerced to boolean
       else if types[i][0] = "boolean" and (types[j][0] = "integer" or types[j][0] = "longInteger" or types[j][0] = "float")
         r = r + m.AssertTrue(result)
       else if types[j][0] = "boolean" and (types[i][0] = "integer" or types[i][0] = "longInteger" or types[i][0] = "float")
         r = r + m.AssertTrue(result)
+
+      ' Everything else will be false
       else
         r = r + m.AssertFalse(result)
       end if

@@ -135,12 +135,8 @@ Function testCase_clone_stringish_roString()
   source = CreateObject("roString")
   source.setString("abcd")
   dest = m._.clone(source)
-  print "source = "; source
-  print "dest = "; dest
   result = m.AssertTrue(source = dest)
   source.setString("wxyz")
-  print "source = "; source
-  print "dest = "; dest
   result = result + m.AssertTrue(source <> dest)
   return result
 End Function

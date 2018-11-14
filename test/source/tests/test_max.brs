@@ -5,7 +5,7 @@ Function testSuite_max()
   this.addTest("max_int", testCase_max_int)
   this.addTest("max_roInt", testCase_max_roint)
   this.addTest("max_float", testCase_max_float)
-  this.addTest("max_invalid", testCase_max_invalid)
+  this.addTest("max_alltypes", testCase_max_alltypes)
   return this
 End Function
 
@@ -33,6 +33,14 @@ Function testCase_max_float()
   return result
 End Function
 
-Function testCase_max_invalid()
-  return m.AssertInvalid(m._.max(invalid, 2))
+Function testCase_max_alltypes()
+  types = allTypes()
+
+  result = ""
+  for i=0 to types.count()-1
+    for j=0 to types.count()-1
+      highest = m._.max(types[i][1], types[j][1])
+    end for
+  end for
+  return result
 End Function

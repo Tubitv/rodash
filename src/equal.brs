@@ -19,14 +19,49 @@
 '
 '
 Function rodash_equal_(a, b)
-  compare = false
-  result = eval("if a = b then compare = true")
-  if not compare
-    if type(a) = type(b)
-      if type(a) = invalid 
-        compare = true
+  ' These types will always compare to false or fail comparison with runtime errors
+  all = {
+    "rosgnode": true
+    "rofunction": true
+    "invalid": true
+    "roarray": true
+    "roassociativearray": true
+  }
+  ' Key-value pairs which will cause runtime errors if comparisons attempted
+  incomparable = {
+    "string": {
+      "integer": true
+      "rointeger": true
+      "boolean": true
+      "roboolean": true
+      "roarray": true
+      "roassociativearray": true
+      "longinteger": true
+      "rofloat": true
+    }
+    "rostring": {
+      "integer": true
+      "rointeger": true
+      "boolean": true
+      "roboolean": true
+      "roarray": true
+      "roassociativearray": true
+      "longinteger": true
+      "rofloat": true
+    }
+  }
+  atype = lcase(type(a))
+  btype = lcase(type(b))
+  if all[atype] = invalid and all[btype] = invalid
+    if incomparable[lcase(type(a))] = invalid or incomparable[lcase(type(a))][lcase(type(b))] = invalid 
+      if incomparable[lcase(type(b))] = invalid or incomparable[lcase(type(b))][lcase(type(a))] = invalid
+        if a = b
+          return true
+        else if type(a) = type(b) and type(a) = invalid 
+          return true
+        end if
       end if
     end if
   end if
-  return compare
+  return false
 End Function
