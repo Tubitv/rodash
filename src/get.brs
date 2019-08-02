@@ -19,9 +19,9 @@
 '  * '  => invalid
 '  *
 '  */
-Function rodash_get_(aa, path, default=invalid)
+Function rodash_get_(array, path, default=invalid)
 
-  if aa = invalid or type(aa) <> "roAssociativeArray" then return default
+if array = invalid or not (type(array) = "roAssociativeArray" or type(array) = "roArray") then return default
 
   segments = m.pathAsArray_(path)
   if segments = invalid then return default
@@ -29,18 +29,18 @@ Function rodash_get_(aa, path, default=invalid)
   result = invalid
   while segments.count() > 0
     key = segments.shift()
-    if not aa.doesExist(key)
+    value = array[key]
+    if value = invalid
       exit while
     end if
-    value = aa.lookup(key)
     if segments.count() = 0
       result = value
       exit while
     end if
-    if value = invalid or type(value) <> "roAssociativeArray"
+    if not (type(value) = "roAssociativeArray" or type(value) = "roArray")
       exit while
     end if
-    aa = value
+    array = value
   end while
 
   if result = invalid then return default

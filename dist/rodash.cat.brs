@@ -1,4 +1,4 @@
-' VERSION: rodash 0.3.0
+' VERSION: rodash 0.3.1
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
@@ -331,25 +331,25 @@ end if
 end if
 return false
 End Function
-Function rodash_get_(aa, path, default=invalid)
-if aa = invalid or type(aa) <> "roAssociativeArray" then return default
+Function rodash_get_(array, path, default=invalid)
+if array = invalid or not (type(array) = "roAssociativeArray" or type(array) = "roArray") then return default
 segments = m.pathAsArray_(path)
 if segments = invalid then return default
 result = invalid
 while segments.count() > 0
 key = segments.shift()
-if not aa.doesExist(key)
+value = array[key]
+if value = invalid
 exit while
 end if
-value = aa.lookup(key)
 if segments.count() = 0
 result = value
 exit while
 end if
-if value = invalid or type(value) <> "roAssociativeArray"
+if not (type(value) = "roAssociativeArray" or type(value) = "roArray")
 exit while
 end if
-aa = value
+array = value
 end while
 if result = invalid then return default
 return result
