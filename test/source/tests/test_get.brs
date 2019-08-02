@@ -7,6 +7,8 @@ Function testSuite_get()
   this.addTest("get_deepString", testCase_get_deepString)
   this.addTest("get_deepArray", testCase_get_deepArray)
   this.addTest("get_deepList", testCase_get_deepList)
+  this.addTest("get_arrayIndex", testCase_get_arrayIndex)
+  this.addTest("get_deepArrayIndex", testCase_get_deepArrayIndex)
   this.addTest("get_deepStringInvalid", testCase_get_deepStringInvalid)
   this.addTest("get_deepArrayInvalid", testCase_get_deepArrayInvalid)
   this.addTest("get_default", testCase_get_default)
@@ -78,6 +80,26 @@ Function testCase_get_deepList() As String
   list.push("f")
   value = m._.get(data, list)
   return m.AssertTrue(value = 4)
+End Function
+
+
+Function testCase_get_arrayIndex() As String
+  value = m._.get(["a", "b"], "0")
+  return m.AssertTrue(value = "a")
+End Function
+
+Function testCase_get_deepArrayIndex() As String
+  data = {
+    a: 1
+    b: [
+      {
+        c: 2,
+        d: [3, 4]
+      }
+    ]
+  }
+  value = m._.get(data, "b[0].d[0]")
+  return m.AssertTrue(value = 3)
 End Function
 
 Function testCase_get_deepStringInvalid() As String
