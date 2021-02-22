@@ -19,8 +19,6 @@ Function rodash_getDeviceProfile_() As Object
   ' Safe fallback for various unique identifiers
   if FindMemberFunction(di, "GetChannelClientId") <> invalid
     uniqueId = di.GetChannelClientId()
-  else if FindMemberFunction(di, "GetClientTrackingId") <> invalid
-    uniqueId = di.GetClientTrackingId()
   else if FindMemberFunction(di, "GetPublisherId") <> invalid
     uniqueId = di.GetPublisherId()
   else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
@@ -31,16 +29,12 @@ Function rodash_getDeviceProfile_() As Object
 
   if FindMemberFunction(di, "GetRIDA") <> invalid
     adId = di.GetRIDA()
-  else if FindMemberFunction(di, "GetAdvertisingId") <> invalid
-    adId = di.GetAdvertisingId()
   else
     adId = ""
   end if
 
   if FindMemberFunction(di, "IsRIDADisabled") <> invalid
     tracking = di.IsRIDADisabled()
-  else if FindMemberFunction(di, "IsAdIdTrackingDisabled") <> invalid
-    tracking = di.IsAdIdTrackingDisabled()
   else 
     tracking = false
   end if
