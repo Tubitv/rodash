@@ -1,4 +1,4 @@
-' VERSION: rodash 0.3.1
+' VERSION: rodash 0.3.2
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
@@ -187,8 +187,6 @@ ai = CreateObject("roAppInfo")
 di = CreateObject("roDeviceInfo")
 if FindMemberFunction(di, "GetChannelClientId") <> invalid
 uniqueId = di.GetChannelClientId()
-else if FindMemberFunction(di, "GetClientTrackingId") <> invalid
-uniqueId = di.GetClientTrackingId()
 else if FindMemberFunction(di, "GetPublisherId") <> invalid
 uniqueId = di.GetPublisherId()
 else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
@@ -198,15 +196,11 @@ uniqueId = ""
 end if
 if FindMemberFunction(di, "GetRIDA") <> invalid
 adId = di.GetRIDA()
-else if FindMemberFunction(di, "GetAdvertisingId") <> invalid
-adId = di.GetAdvertisingId()
 else
 adId = ""
 end if
 if FindMemberFunction(di, "IsRIDADisabled") <> invalid
 tracking = di.IsRIDADisabled()
-else if FindMemberFunction(di, "IsAdIdTrackingDisabled") <> invalid
-tracking = di.IsAdIdTrackingDisabled()
 else 
 tracking = false
 end if
