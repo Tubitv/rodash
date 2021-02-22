@@ -1,4 +1,4 @@
-' VERSION: rodash 0.3.2
+' VERSION: rodash 0.3.3
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
@@ -189,8 +189,6 @@ if FindMemberFunction(di, "GetChannelClientId") <> invalid
 uniqueId = di.GetChannelClientId()
 else if FindMemberFunction(di, "GetPublisherId") <> invalid
 uniqueId = di.GetPublisherId()
-else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
-uniqueId = di.GetPublisherId()
 else
 uniqueId = ""
 end if
@@ -242,7 +240,7 @@ features: {
 }
 locale: di.GetCurrentLocale()
 country: di.GetCountryCode()
-drm: di.GetDrmInfo()
+drm: drmInfo
 displayType: di.GetDisplayType()
 displayMode: di.GetDisplayMode()
 displayAspectRatio: di.GetDisplayAspectRatio()
