@@ -21,8 +21,6 @@ Function rodash_getDeviceProfile_() As Object
     uniqueId = di.GetChannelClientId()
   else if FindMemberFunction(di, "GetPublisherId") <> invalid
     uniqueId = di.GetPublisherId()
-  else if FindMemberFunction(di, "GetDeviceUniqueId") <> invalid
-    uniqueId = di.GetPublisherId()
   else
     uniqueId = ""
   end if
@@ -78,7 +76,7 @@ Function rodash_getDeviceProfile_() As Object
       }
       locale: di.GetCurrentLocale()
       country: di.GetCountryCode()
-      drm: di.GetDrmInfo()
+      drm: drmInfo
       displayType: di.GetDisplayType()
       displayMode: di.GetDisplayMode()
       displayAspectRatio: di.GetDisplayAspectRatio()
