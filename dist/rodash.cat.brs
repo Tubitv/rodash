@@ -221,7 +221,7 @@ model: di.GetModel()
 modelDetails: di.GetModelDetails()
 modelDisplayName: di.GetModelDisplayName()
 friendlyName: di.GetFriendlyName()
-version: di.GetVersion()
+version: di.GetOSVersion().major + "." + di.GetOSVersion().minor + di.GetOSVersion().build
 uniqueId: uniqueId
 advertisingId: adId
 adTrackingDisabled: tracking
