@@ -1,4 +1,4 @@
-' VERSION: rodash 0.3.3
+' VERSION: rodash 0.3.4
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
@@ -202,11 +202,6 @@ tracking = di.IsRIDADisabled()
 else 
 tracking = false
 end if
-if FindMemberFunction(di, "GetDrmInfoEx") <> invalid
-drmInfo = di.GetDrmInfoEx()
-else if FindMemberFunction(di, "GetDrmInfo") <> invalid
-drmInfo = di.GetDrmInfo()
-end if
 profile =  {
 appInfo: {
 id: ai.GetID()
@@ -240,7 +235,7 @@ features: {
 }
 locale: di.GetCurrentLocale()
 country: di.GetCountryCode()
-drm: drmInfo
+drm: di.GetDrmInfoEx()
 displayType: di.GetDisplayType()
 displayMode: di.GetDisplayMode()
 displayAspectRatio: di.GetDisplayAspectRatio()
@@ -250,9 +245,9 @@ displayProperties: di.GetDisplayProperties()
 supportedGraphicsResolutions: di.GetSupportedGraphicsResolutions()
 uiResolution: di.GetUIResolution()
 graphicsPlatform: di.GetGraphicsPlatform()
-videoDecodeInfo: di.GetVideoDecodeInfo()
+videoDecodeInfo: {} 'deprecated
 audioOutputChannel: di.GetAudioOutputChannel()
-audioDecodeInfo: di.GetAudioDecodeInfo()
+audioDecodeInfo: {} 'deprecated
 }
 }
 return profile
