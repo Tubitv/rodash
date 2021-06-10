@@ -37,12 +37,6 @@ Function rodash_getDeviceProfile_() As Object
     tracking = false
   end if
 
-  if FindMemberFunction(di, "GetDrmInfoEx") <> invalid
-    drmInfo = di.GetDrmInfoEx()
-  else if FindMemberFunction(di, "GetDrmInfo") <> invalid
-    drmInfo = di.GetDrmInfo()
-  end if
-
   profile =  {
     appInfo: {
       id: ai.GetID()
@@ -76,7 +70,7 @@ Function rodash_getDeviceProfile_() As Object
       }
       locale: di.GetCurrentLocale()
       country: di.GetCountryCode()
-      drm: drmInfo
+      drm: di.GetDrmInfoEx()
       displayType: di.GetDisplayType()
       displayMode: di.GetDisplayMode()
       displayAspectRatio: di.GetDisplayAspectRatio()
@@ -86,9 +80,9 @@ Function rodash_getDeviceProfile_() As Object
       supportedGraphicsResolutions: di.GetSupportedGraphicsResolutions()
       uiResolution: di.GetUIResolution()
       graphicsPlatform: di.GetGraphicsPlatform()
-      videoDecodeInfo: di.GetVideoDecodeInfo()
+      videoDecodeInfo: {} 'deprecated
       audioOutputChannel: di.GetAudioOutputChannel()
-      audioDecodeInfo: di.GetAudioDecodeInfo()
+      audioDecodeInfo: {} 'deprecated
     }
   }
   return profile
