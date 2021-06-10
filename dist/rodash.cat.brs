@@ -1,4 +1,4 @@
-' VERSION: rodash 0.3.3
+' VERSION: rodash 0.3.4
 ' LICENSE: Permission is hereby granted, free of charge, to any person obtaining
 ' LICENSE: a copy of this software and associated documentation files (the
 ' LICENSE: "Software"), to deal in the Software without restriction, including
