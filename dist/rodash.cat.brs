@@ -6,10 +6,10 @@
 ' LICENSE: distribute, sublicense, and/or sell copies of the Software, and to
 ' LICENSE: permit persons to whom the Software is furnished to do so, subject to
 ' LICENSE: the following conditions:
-' LICENSE: 
+' LICENSE:
 ' LICENSE: The above copyright notice and this permission notice shall be
 ' LICENSE: included in all copies or substantial portions of the Software.
-' LICENSE: 
+' LICENSE:
 ' LICENSE: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 ' LICENSE: EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 ' LICENSE: MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,7 +53,7 @@ return destination.GetString()
 end if
 End Function
 Function rodash_clone_(source)
-if source <> invalid 
+if source <> invalid
 if type(source) = "roSGNode"
 return m.cloneNode_(source)
 else if type(source) = "roAssociativeArray"
@@ -199,7 +199,7 @@ adId = ""
 end if
 if FindMemberFunction(di, "IsRIDADisabled") <> invalid
 tracking = di.IsRIDADisabled()
-else 
+else
 tracking = false
 end if
 profile =  {
@@ -253,7 +253,7 @@ audioDecodeInfo: {} 'deprecated
 return profile
 End Function
 Function rodash_difference_(first, second)
-result = []  
+result = []
 for each f in first
 result.push(f)
 for each s in second
@@ -306,11 +306,11 @@ incomparable = {
 atype = lcase(type(a))
 btype = lcase(type(b))
 if all[atype] = invalid and all[btype] = invalid
-if incomparable[lcase(type(a))] = invalid or incomparable[lcase(type(a))][lcase(type(b))] = invalid 
+if incomparable[lcase(type(a))] = invalid or incomparable[lcase(type(a))][lcase(type(b))] = invalid
 if incomparable[lcase(type(b))] = invalid or incomparable[lcase(type(b))][lcase(type(a))] = invalid
 if a = b
 return true
-else if type(a) = type(b) and type(a) = invalid 
+else if type(a) = type(b) and type(a) = invalid
 return true
 end if
 end if
@@ -349,7 +349,7 @@ end for
 return -1
 End Function
 Function rodash_intersection_(first, second)
-result = []  
+result = []
 for each f in first
 for each s in second
 if m.equal(s,f) then result.push(f)
@@ -478,7 +478,6 @@ End Function
 Function rodash_regRead_(sectionName As String, key As String) As Dynamic
 sectionName = LCase(sectionName)
 key = LCase(key)
-registry = CreateObject("roRegistry")  
 section = CreateObject("roRegistrySection", sectionName)
 if section.Exists(key) then
 return ParseJson(section.Read(key))
@@ -489,7 +488,7 @@ End Function
 Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
 sectionName = LCase(sectionName)
 key = LCase(key)
-registry = CreateObject("roRegistry")  
+registry = CreateObject("roRegistry")
 section = CreateObject("roRegistrySection", sectionName)
 section.Write(key, FormatJson(value))
 section.Flush()
@@ -609,7 +608,7 @@ value = ""
 else
 value = value.toStr()  ' force to roString
 if FindMemberFunction(value, "EncodeUriComponent") <> invalid then
-value = value.EncodeUriComponent()          
+value = value.EncodeUriComponent()
 else
 transferEncoder = CreateObject("roUrlTransfer")
 value = transferEncoder.Escape(value)
@@ -617,7 +616,7 @@ end if
 end if
 encoded = encoded + param.toStr() + "=" + value + "&"
 end for
-if Right(encoded, 1) = "&" then 
+if Right(encoded, 1) = "&" then
 encoded = Left(encoded, Len(encoded)-1)
 end if
 end if
@@ -653,7 +652,7 @@ result.port = input.mid(1, port_end-1)  ' take the ':' prefix off
 input = input.mid(port_end)
 end if
 path_end = input.instr("?")
-if path_end = -1 then 
+if path_end = -1 then
 path_end = input.instr("#")
 if path_end = -1 then path_end = input.len()
 end if
