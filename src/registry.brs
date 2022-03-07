@@ -24,7 +24,7 @@
 '  * @instance
 '  * @description Read registry at key in sectionName and deserialize from JSON string.
 '  * @example
-'  * 
+'  *
 '  * _.regRead("auth", "password")
 '  * '  => "secret123abc!"
 '  *
@@ -33,12 +33,11 @@
 '  *
 '  * _.regRead("user", "settings")
 '  * '  => {a:1, b:2}
-'  * 
+'  *
 '  */
 Function rodash_regRead_(sectionName As String, key As String) As Dynamic
   sectionName = LCase(sectionName)
   key = LCase(key)
-  registry = CreateObject("roRegistry")  
   section = CreateObject("roRegistrySection", sectionName)
   if section.Exists(key) then
     return ParseJson(section.Read(key))
@@ -53,18 +52,18 @@ End Function
 '  * @instance
 '  * @description Serialize value to JSON string and write to the registry at key in sectionName.
 '  * @example
-'  * 
+'  *
 '  * _.regWrite("auth", "password", "secret123abc!")
 '  *
 '  * _.regWrite("user", "bookmarkIds", [1,2,3])
 '  *
 '  * _.regWrite("user", "settings", {a:1, b:2})
-'  * 
+'  *
 '  */
 Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
   sectionName = LCase(sectionName)
   key = LCase(key)
-  registry = CreateObject("roRegistry")  
+  registry = CreateObject("roRegistry")
   section = CreateObject("roRegistrySection", sectionName)
   section.Write(key, FormatJson(value))
   section.Flush()
@@ -125,8 +124,8 @@ End Function
 '  * @member regWriteAll
 '  * @memberof module:rodash
 '  * @instance
-'  * @description 
-'  *   Write the entire registry for the channel. By default this overwrites 
+'  * @description
+'  *   Write the entire registry for the channel. By default this overwrites
 '  *   any existing data, but will not remove any sections or keys
 '  *
 '  * @example
