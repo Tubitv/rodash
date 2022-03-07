@@ -16,8 +16,7 @@
 ' LICENSE: NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 ' LICENSE: LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ' LICENSE: OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-' LICENSE: WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-Function rodash_cloneNode_(source)
+' LICENSE: WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.Function rodash_cloneNode_(source)
 blacklistedFields = ["change", "focusedChild"]  ' read-only fields
 destination = CreateObject("roSGNode", source.subtype())
 fields = source.getFields()
@@ -478,7 +477,6 @@ End Function
 Function rodash_regRead_(sectionName As String, key As String) As Dynamic
 sectionName = LCase(sectionName)
 key = LCase(key)
-registry = CreateObject("roRegistry")  
 section = CreateObject("roRegistrySection", sectionName)
 if section.Exists(key) then
 return ParseJson(section.Read(key))
@@ -489,7 +487,7 @@ End Function
 Function rodash_regWrite_(sectionName As String, key As String, value As Dynamic) As Void
 sectionName = LCase(sectionName)
 key = LCase(key)
-registry = CreateObject("roRegistry")  
+registry = CreateObject("roRegistry")
 section = CreateObject("roRegistrySection", sectionName)
 section.Write(key, FormatJson(value))
 section.Flush()
