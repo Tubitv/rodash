@@ -34,7 +34,7 @@
 '  *
 '  * value = _.get(data, "0.1.contentMode") ' value of 1st child of 2nd child's contentMode
 '  *
-'  *  value = _.get(data, "trackingPageInfo.pageType")
+'  * value = _.get(data, "trackingPageInfo.pageType")
 '  *
 '
 '  */
@@ -50,7 +50,7 @@ if array = invalid or not (type(array) = "roAssociativeArray" or type(array) = "
   while segments.count() > 0
     key = segments.shift()
 
-    if array <> invalid and GetInterface(array, "ifSGNodeChildren") <> invalid
+    if array <> invalid and type(array) = "roSGNode"
       
       if type(key) = "roString" and array.hasField(key)
         value = array[key]
