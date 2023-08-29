@@ -16,6 +16,14 @@ Function testSuite_get()
   this.addTest("get_badAADefault", testCase_get_badAADefault)
   this.addTest("get_badPath", testCase_get_badPath)
   this.addTest("get_badPathDefault", testCase_get_badPathDefault)
+  this.addTest("get_simpleField", testCase_get_simpleField)
+  this.addTest("get_simpleNode", testCase_get_simpleNode)
+  this.addTest("get_ChildNode", testCase_get_ChildNode)
+  this.addTest("get_defaultForNode", testCase_get_defaultForNode)
+  this.addTest("get_badNode", testCase_get_badNode)
+  this.addTest("get_badNodeDefault", testCase_get_badNodeDefault)
+  this.addTest("get_childInvalid", testCase_get_childInvalid)
+  this.addTest("get_deepChildInvalid", testCase_get_deepChildInvalid)
   return this
 End Function
 
@@ -134,3 +142,74 @@ End Function
 Function testCase_get_badPathDefault()
   return m.AssertEqual(m._.get({a:1}, invalid, "default"), "default")
 End Function
+
+Function testCase_get_simpleField()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+
+  value = m._.get(source, "id")
+  return m.AssertTrue(value = "parentNode")
+End Function
+
+Function testCase_get_simpleNode()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+
+  value = m._.get(source, "id")
+  return m.AssertTrue(value = "parentNode")
+End Function
+
+Function testCase_get_ChildNode()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+
+  value = m._.get(source, "0.id")
+  return m.AssertTrue(value = "abc")
+
+End Function
+
+Function testCase_get_defaultForNode()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+
+  value = m._.get(source, "0.0.id", "def")
+  return m.AssertEqual(value, "def")
+End Function
+
+Function testCase_get_badNode()
+  return m.AssertInvalid(m._.get(invalid, "id"))
+End Function
+
+Function testCase_get_badNodeDefault()
+  return m.AssertEqual(m._.get(invalid, "id", "default"), "default")
+End Function
+
+Function testCase_get_childInvalid()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+
+  value = m._.get(source, "0.id")
+  return m.AssertInvalid(value)
+End Function
+
+Function testCase_get_deepChildInvalid()
+  source = CreateObject("roSGNode", "ContentNode")
+  source.id = "parentNode"
+  child1 = source.createChild("ContentNode")
+  child1.id = "abc"
+  child2 = source.createChild("ContentNode")
+  child2.id = "def"
+  grandchild1 = child2.createChild("ContentNode")
+  grandchild1.id = "ghi"
+
+  value = m._.get(source, "0.3.id")
+  return m.AssertInvalid(value)
+End function
