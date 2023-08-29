@@ -22,20 +22,22 @@
 '  * '  => invalid
 '  *
 '  * data = <Component: roSGNode:Group> = {
-'  *   signedIn: false
-'  *   id: "homeScreen"
-'  *   trackingPageInfo: <Component: roAssociativeArray>
+'  *   opacity: 1.0
+'  *   id: "my_component"
+'  *   configs: <Component: roAssociativeArray>
+'  *   viewList: invalid (roArray)
 '  *   ...... other common fields of node
 '  * }
 
-'  * value = _.get(data, "signedIn")
+'  * value = _.get(data, "opacity")
 '  *
-'  * value = _.get(data, "0.id") ' value of First child's id
+'  * value = _.get(data, "0.id") ' value of data's first child's id field
 '  *
-'  * value = _.get(data, "0.1.contentMode") ' value of 1st child of 2nd child's contentMode
+'  * value = _.get(data, "0.1.color") ' value of data's first child's, second child's color field.
 '  *
-'  * value = _.get(data, "trackingPageInfo.pageType")
+'  * value = _.get(data, "configs.showFeature")
 '  *
+'  * value = _.get(data, "viewList.0")
 '
 '  */
 Function rodash_get_(array, path, default=invalid)
@@ -45,45 +47,35 @@ if array = invalid or not (type(array) = "roAssociativeArray" or type(array) = "
   segments = m.pathAsArray_(path)
   if segments = invalid then return default
 
-  result = array
+  result = invalid
 
   while segments.count() > 0
     key = segments.shift()
 
-    if array <> invalid and type(array) = "roSGNode"
-      
-      if type(key) = "roString" and array.hasField(key)
-        value = array[key]
-        result = result.getField(key)
-      else if Type(key) = "roInt"
-        if key < 0 or key >= array.getChildCount() then
-          array = invalid
-          exit while
-        end if
-
-        result = result.getChild(key)
-      else
+    if type(array) = "roSGNode" and (type(key) = "roInt" or type(key) = "roInteger" or type(key) = "Integer")
+      if key < 0 or key >= array.getChildCount() then
         result = invalid
         exit while
       end if
 
+      result = array.getChild(key)
     else
-      value = array[key]
-      if value = invalid
-        exit while
-      end if
-
-      if segments.count() = 0
-        result = value
-        exit while
-      end if
-
-      if not (type(value) = "roAssociativeArray" or type(value) = "roArray")
-        exit while
-      end if
-      
-      array = value
+      result = array[key]
     end if
+
+    if segments.count() = 0
+      exit while
+    end if
+
+    if result = invalid
+      exit while
+    end if
+
+    if not (type(result) = "roAssociativeArray" or type(result) = "roArray" or type(result) = "roSGNode")
+      exit while
+    end if
+
+    array = result
   end while
 
   if result = invalid then return default
