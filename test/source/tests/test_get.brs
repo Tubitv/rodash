@@ -220,7 +220,7 @@ Function testCase_get_deepChildFromNode()
   grandchild2.id = "jkl"
 
   value = m._.get(source, "1.1.id")
-  return m.AssertInvalid(value)
+  return m.AssertEqual(value, "jkl")
 End Function
 
 Function testCase_get_arrayFieldFromNode()
