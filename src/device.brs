@@ -42,7 +42,6 @@ Function rodash_getDeviceProfile_() As Object
       id: ai.GetID()
       version: ai.GetVersion()
       title: ai.GetTitle()
-      subtitle: ai.GetSubtitle()
       devid: ai.GetDevID()
       isDev: ai.IsDev()
     }
